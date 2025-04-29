@@ -9,6 +9,14 @@ import java.util.Random;
 // 우주 배열길이 11개
 
 public class MonsterBase {
+	int maxHP;
+	int currentHP;
+	int HPPercentage;
+	String filePath; // 기본 이미지 (나)
+	String reverseFilePath; // 반전 이미지(야생)
+
+	PrintImgClass printImgClass;
+
 	public Random r = new Random();
 
 	public int probabilityValue;
@@ -26,7 +34,11 @@ public class MonsterBase {
 	public boolean ifCatch = false;
 
 	public MonsterBase() {
+		this.maxHP = 999999999;
+		this.currentHP = this.maxHP;
 		this.name = "기본";
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\기본 그림.txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\기본 그림.txt";
 	}
 
 	public MonsterBase(String name) {
@@ -64,4 +76,5 @@ public class MonsterBase {
 		Thread.sleep(500);
 		System.out.println("\n>> ...");
 	}
+	
 }

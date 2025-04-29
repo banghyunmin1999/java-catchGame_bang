@@ -124,7 +124,12 @@ public class GameManager {
 			}
 		}
 	}
-
+	// [new] 콘솔 클리어 메소드
+	public void claerConsole() {
+		for (int i = 0; i < 30; i++) {
+			System.out.println();
+		}
+	}
 	// 게임 실행 메소드
 	public void runGame() throws InterruptedException {
 		while (this.isRunning) {
