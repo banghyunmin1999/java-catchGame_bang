@@ -1,11 +1,11 @@
 package catchGame;
 
-import catchGame.manage.GameManager2;
+import catchGame.manage.GameManager;
 
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
-		GameManager2 manager = new GameManager2();
+		GameManager manager = new GameManager();
 		manager.runGame();
 	}
 }

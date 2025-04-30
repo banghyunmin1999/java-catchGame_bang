@@ -3,6 +3,8 @@ package catchGame.map;
 import java.util.Random;
 import java.util.Scanner;
 
+import catchGame.manage.TextBoxClass;
+
 public class MapExploring {
 	public String[] map = { "하늘", "바다", "땅", "랜덤", "취소" };
 	Scanner scanner = new Scanner(System.in);
@@ -20,15 +22,21 @@ public class MapExploring {
 	public void mapInput(int mapCount) throws InterruptedException {
 		this.mapIterationCount = mapCount;
 		while (this.mapIndex == 2) {
-			if (this.mapIterationCount < 1) {
-				System.out.println("\n+++ 몬스터 잡기 게임 +++");
-			}
-			System.out.println("🗺️ 맵을 선택하세요 (☁️ 하늘|🌊 바다|🌴 땅|🎲 랜덤|⚠️ 취소)");
+//			if (this.mapIterationCount < 1) {
+//				System.out.println("\n+++ 몬스터 잡기 게임 +++");
+//			}
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("맵을 선택하세요 ( 하늘 | 바다 | 땅 | 랜덤 | 취소)");
+			TextBoxClass.printTextBoxEnd();
+//			System.out.println("🗺️ 맵을 선택하세요 (⛅ 하늘|🌊 바다|🌴 땅|🎲 랜덤|⚠️ 취소)");
 			this.answerMap = scanner.nextLine();
 			this.mapIndex = mapSelect(this.answerMap);
 			if (this.mapIndex == 0) {
 				Thread.sleep(500);
-				System.out.println("\n>> 맵 이동중입니다...");
+				TextBoxClass.printTextBoxStart();
+				TextBoxClass.printTextBox(">> 맵 이동중입니다...");
+				TextBoxClass.printTextBoxEnd();
+
 				Thread.sleep(500);
 				this.mapIterationCount++;
 				break;
@@ -45,19 +53,30 @@ public class MapExploring {
 	// 랜덤일 때는 mapProbability를 호출하여 다시 맵을 고르고 mapProbabilityAnswer에 랜덤으로 정한 맵 이름 반환
 	public int mapSelect(String answerMap) throws InterruptedException {
 		if (answerMap.equals("하늘")) {
-			System.out.println("☁️ 하늘맵 페이지로 이동합니다");
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("하늘맵 페이지로 이동합니다");
+			TextBoxClass.printTextBoxEnd();
 			this.mapProbabilityAnswer = this.answerMap;
 			this.mapReturn = 0;
 		} else if (answerMap.equals("바다")) {
-			System.out.println("🌊 바다맵 페이지로 이동합니다");
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("바다맵 페이지로 이동합니다");
+			TextBoxClass.printTextBoxEnd();
+//			System.out.println("🌊 바다맵 페이지로 이동합니다");
 			this.mapProbabilityAnswer = this.answerMap;
 			this.mapReturn = 0;
 		} else if (answerMap.equals("땅")) {
-			System.out.println("🌴 땅맵 페이지로 이동합니다");
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("땅맵 페이지로 이동합니다");
+			TextBoxClass.printTextBoxEnd();
+//			System.out.println("🌴 땅맵 페이지로 이동합니다");
 			this.mapProbabilityAnswer = this.answerMap;
 			this.mapReturn = 0;
 		} else if (answerMap.equals("랜덤")) {
-			System.out.println("=========랜덤맵 생성 중...=========");
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("=========랜덤맵 생성 중...=========");
+			TextBoxClass.printTextBoxEnd();
+//			System.out.println("=========랜덤맵 생성 중...=========");
 			Thread.sleep(500);
 			String[] probabilityAnswer = mapProbability().split(" ");
 			mapProbabilityAnswer = probabilityAnswer[1];
@@ -66,7 +85,10 @@ public class MapExploring {
 		} else if (answerMap.equals("취소")) {
 			this.mapReturn = 1;
 		} else {
-			System.out.println("잘못 입력하셨습니다");
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("잘못 입력하셨습니다");
+			TextBoxClass.printTextBoxEnd();
+//			System.out.println("잘못 입력하셨습니다");
 			this.mapReturn = 2;
 		}
 		return this.mapReturn;

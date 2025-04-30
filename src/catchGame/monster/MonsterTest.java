@@ -5,7 +5,7 @@ public class MonsterTest extends MonsterBase {
 	public MonsterTest() {
 		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\유저.txt";
 		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\잉어킹 야생.txt";
-		this.maxHP = 10;
+		this.maxHP = 10000;
 		this.ATT = 5;
 		this.currentHP = this.maxHP;
 		this.currentHPPercentage();

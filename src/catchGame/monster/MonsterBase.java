@@ -9,12 +9,12 @@ import java.util.Random;
 // 우주 배열길이 11개
 
 public class MonsterBase {
-	public int maxHP = 999999999;
-	public int currentHP= this.maxHP;
-	public int HPPercentage=100;
-	public int ATT= 1;
-	public String filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\유저.txt";
-	public String reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\유저.txt";
+	public int maxHP;
+	public int currentHP;
+	public int HPPercentage;
+	public int ATT;
+	public String filePath; // 기본 이미지 (나)
+	public String reverseFilePath; // 반전 이미지(야생)
 
 	public PrintImgClass printImgClass;
 
@@ -49,11 +49,16 @@ public class MonsterBase {
 	//[new] 공격당했을때 처리
 	public boolean attackedAction(MonsterBase monsterBase) {
 		this.currentHP  = this.currentHP - monsterBase.ATT;
+		monsterBase.currentHP = monsterBase.currentHP - this.ATT;
+		if(monsterBase.currentHP <= 0 ) {
+			System.out.println("체력이 없어서 더는 싸울수가 없다.. 정신이 아늑해졌다");
+			System.exit(0);
+		}
 		if (this.currentHP <= 0) { //몬스터의 HP가 0이하일 경우
 			return false;
 		}else {
 			return true;
-		}
+	}
 	}
 	//[new] HPPercentage 갱신
 	public void currentHPPercentage() {

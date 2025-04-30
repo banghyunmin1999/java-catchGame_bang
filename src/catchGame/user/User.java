@@ -33,11 +33,17 @@ public class User {
 		    this.userName = customTrim(input);
 
 		    if (customIsEmpty(this.userName)) {
-		        System.out.println("⚠️ 이름은 공백일 수 없습니다. 기본 이름으로 설정합니다.");
+				TextBoxClass.printTextBoxStart();
+				TextBoxClass.printTextBox("이름은 공백일 수 없습니다. 기본 이름으로 설정합니다.");
+				TextBoxClass.printTextBoxEnd();
+//		        System.out.println("⚠️ 이름은 공백일 수 없습니다. 기본 이름으로 설정합니다.");
 		        this.userName = "트레이너";
 		    }
 		} catch (Exception e) {
-		    System.out.println("⚠️ 입력 도중 오류가 발생했습니다. 기본 이름으로 설정합니다.");
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("입력 도중 오류가 발생했습니다. 기본 이름으로 설정합니다.");
+			TextBoxClass.printTextBoxEnd();
+//		    System.out.println("⚠️ 입력 도중 오류가 발생했습니다. 기본 이름으로 설정합니다.");
 		    this.userName = "트레이너";
 		}
 		
@@ -123,31 +129,55 @@ public class User {
 	//[new] 못만났을경우 바로 돌아가는걸 판단하기 위해 return 추가
 	private boolean checkMonster(MonsterBase monster) {
 		if (monster.isMet == 1) {
-			System.out.println("\n💥 몬스터를 만났다! 💥\n");
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("몬스터를 만났다!");
+			TextBoxClass.printTextBoxEnd();
+//			System.out.println("\n💥 몬스터를 만났다! 💥\n");
 			monster.appearanceComment();
 			return true;
 		} else {
-			System.out.println("\n😢 몬스터를 만나지 못했다... 😢\n");
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("몬스터를 만나지 못했다...");
+			TextBoxClass.printTextBoxEnd();
+//			System.out.println("\n😢 몬스터를 만나지 못했다... 😢\n");
 			return false;
 		}
 	}
 	// [new]몬스터 싸움
 	private void fightMonster(MonsterBase monster) throws InterruptedException {
-		System.out.println("\n>> 싸우는 중");
+		TextBoxClass.printTextBoxStart();
+		TextBoxClass.printTextBox(">> 싸우는 중");
+		TextBoxClass.printTextBoxEnd();
+//		System.out.println("\n>> 싸우는 중");
 		Thread.sleep(500);
-		System.out.println(">> ...");
+		TextBoxClass.printTextBoxStart();
+		TextBoxClass.printTextBox(">> ...");
+		TextBoxClass.printTextBoxEnd();
+//		System.out.println(">> ...");
 		Thread.sleep(500);
-		System.out.println(">> ...\n");
+		TextBoxClass.printTextBoxStart();
+		TextBoxClass.printTextBox(">> ...");
+		TextBoxClass.printTextBoxEnd();
+//		System.out.println(">> ...\n");
 		Thread.sleep(500);
-		System.out.println(">> " + this.usermonster.name + "이"  + monster.ATT + "만큼 피해를 입었다.\n");
-		System.out.println(">> " + monster.name + "에게"  + this.usermonster.ATT + "만큼 피해를 주었다.\n");
-		Thread.sleep(800);
+		TextBoxClass.printTextBoxStart();
+		TextBoxClass.printTextBox(">> " + this.usermonster.name + "이"  + monster.ATT + "만큼 피해를 입었다.");
+		TextBoxClass.printTextBox(">> " + monster.name + "에게"  + this.usermonster.ATT + "만큼 피해를 주었다.");
+		TextBoxClass.printTextBoxEnd();
+//		System.out.println(">> " + this.usermonster.name + "이"  + monster.ATT + "만큼 피해를 입었다.\n");
+//		System.out.println(">> " + monster.name + "에게"  + this.usermonster.ATT + "만큼 피해를 주었다.\n");
+		Thread.sleep(1000);
+		
 		if(monster.attackedAction(this.usermonster)) {
 			monster.currentHPPercentage();
 			this.usermonster.currentHPPercentage();
 			this.userAction(monster, false);
+
 		}else {
-			System.out.println("몬스터가 죽어버렸다....");
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox("몬스터가 죽어버렸다....");
+			TextBoxClass.printTextBoxEnd();
+//			System.out.println("몬스터가 죽어버렸다....");
 			return;
 		}
 	}
@@ -155,11 +185,20 @@ public class User {
 	// 몬스터 포획
 	// 싸운다 → 포획한다 수정  , 필요없는 부분들 수정
 	private void catchFightMonster(MonsterBase monster, boolean isCatch) throws InterruptedException {
+		TextBoxClass.printTextBoxStart();
+		TextBoxClass.printTextBox(">> 포획하는 중");
+		TextBoxClass.printTextBoxEnd();
 		System.out.println("\n>> 포획하는 중");
 		Thread.sleep(500);
-		System.out.println(">> ...");
+		TextBoxClass.printTextBoxStart();
+		TextBoxClass.printTextBox(">> ...");
+		TextBoxClass.printTextBoxEnd();
+//		System.out.println(">> ...");
 		Thread.sleep(500);
-		System.out.println(">> ...\n");
+		TextBoxClass.printTextBoxStart();
+		TextBoxClass.printTextBox(">> ...");
+		TextBoxClass.printTextBoxEnd();
+//		System.out.println(">> ...\n");
 		Thread.sleep(500);
 		this.catchTryMonster(monster, isCatch, monster.name);
 	}
@@ -173,7 +212,10 @@ public class User {
 			if (userChoice.equalsIgnoreCase("1") || userChoice.equalsIgnoreCase("2") || userChoice.equalsIgnoreCase("3")) {
 		        break;
 		    } else {
-		        System.out.println("⚠️ 잘못된 입력입니다. 1,2 3중에 하나를 입력해주세요.");
+				TextBoxClass.printTextBoxStart();
+				TextBoxClass.printTextBox("잘못된 입력입니다. 1,2 3중에 하나를 입력해주세요.");
+				TextBoxClass.printTextBoxEnd();
+//		        System.out.println("⚠️ 잘못된 입력입니다. 1,2 3중에 하나를 입력해주세요.");
 		    }
 		}
 		return userChoice;
@@ -195,7 +237,10 @@ public class User {
 			if (isCatch) {
 				this.myPoket[myPoketCnt] = monster;
 				myPoketCnt++;
-				System.out.println("✨ 띠링! " + catchMonsterName + "이(가) 포켓몬 도감에 등록되었습니다!");
+				TextBoxClass.printTextBoxStart();
+				TextBoxClass.printTextBox("띠링! " + catchMonsterName + "이(가) 포켓몬 도감에 등록되었습니다!");
+				TextBoxClass.printTextBoxEnd();
+//				System.out.println("✨ 띠링! " + catchMonsterName + "이(가) 포켓몬 도감에 등록되었습니다!");
 				this.updateMyPokeDex(catchMonsterName);
 			}
 		}else {
@@ -227,12 +272,18 @@ public class User {
 		int countOnLine = 0;
 		// 중복 여부 확인
 	    boolean isDuplicate = false;
-		
-		System.out.println("사용자명: " + this.userName);
-		System.out.println("사용자 위치: " + (this.location.equals("취소") ? "집" : this.location));
-		System.out.println("플레이 시간: " + getPlayTime());
-		System.out.println("잡은 몬스터 수: " + myPoketCnt + "마리");
-		System.out.println("현재 잡은 몬스터\n");
+		TextBoxClass.printTextBoxStart();
+		TextBoxClass.printTextBox("사용자명: " + this.userName);
+		TextBoxClass.printTextBox("사용자 위치: " + (this.location.equals("취소") ? "집" : this.location));
+		TextBoxClass.printTextBox("플레이 시간: " + getPlayTime());
+		TextBoxClass.printTextBox("잡은 몬스터 수: " + myPoketCnt + "마리");
+		TextBoxClass.printTextBox("현재 잡은 몬스터");
+		TextBoxClass.printTextBoxEnd();
+//		System.out.println("사용자명: " + this.userName);
+//		System.out.println("사용자 위치: " + (this.location.equals("취소") ? "집" : this.location));
+//		System.out.println("플레이 시간: " + getPlayTime());
+//		System.out.println("잡은 몬스터 수: " + myPoketCnt + "마리");
+//		System.out.println("현재 잡은 몬스터\n");
 		for (int i = 0; i < this.myPoketCnt; i++) {
 		    if (this.myPoket[i] == null) continue;
 		    

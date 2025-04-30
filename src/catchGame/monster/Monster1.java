@@ -1,5 +1,7 @@
 package catchGame.monster;
 
+import catchGame.manage.ClearConsole;
+
 public class Monster1 extends MonsterBase {
 
 	public Monster1() {
