@@ -3,7 +3,13 @@ package catchGame.monster;
 public class Monster2 extends MonsterBase {
 
 	public Monster2() {
-		super("피카츄");
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\피카츄.txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\피카츄 야생.txt";
+		this.maxHP = 140;
+		this.ATT = 4;
+		this.currentHP = this.maxHP;
+		this.currentHPPercentage();
+		this.name = "피카츄";
 		this.spawnMap = "땅";
 		this.present = "전기 타입 포켓몬 | 전기가 찌릿찌릿, 가끔은 너무 많은 전기 때문에 착각하는 전격 고양이, 요리로는 볶음밥이 최고일지도?";
 	}
@@ -72,11 +78,13 @@ public class Monster2 extends MonsterBase {
 	@Override
 	public boolean catchMonster() throws InterruptedException {
 		delayTime();
+		
+		int totalCatchPercent = (int)(100 - 35*(double)this.HPPercentage/100);
 		// 잡혔을 때 true
-		if (this.r.nextInt(100) + 1 <= 33) {
+		if (this.r.nextInt(100) < totalCatchPercent) {
 			System.out.println("=========포켓몬 포획 성공!=========");
 			System.out.println(
-					"\"33% 확률로 주인 없는 피카츄가 잡혔다! '도망가면 또 잡힐 거라서 그냥 멈추기로 했다!' 하지만 포켓볼 안에서 어떻게 나갈지 몰라서 어리둥절해한다.\"\n"
+					"\"" + totalCatchPercent + "% 확률로 주인 없는 피카츄가 잡혔다! '도망가면 또 잡힐 거라서 그냥 멈추기로 했다!' 하지만 포켓볼 안에서 어떻게 나갈지 몰라서 어리둥절해한다.\"\n"
 							+ "➤ \"피카피카~! (이게 뭐야? 왜 이렇게 안 나가져?)\"\n" + "(피카츄가 포켓몬볼에 들어가며, 당황한 나머지 볼 안에서 뒹굴고 있다.)");
 			System.out.println();
 			this.ifCatch = true;
@@ -84,7 +92,7 @@ public class Monster2 extends MonsterBase {
 		}
 		// 안 잡혔을 때 false
 		System.out.println("=========포켓몬 포획 실패!=========");
-		System.out.println("\"아뿔싸! 67% 확률로 피카츄가 잡히지 않았다! '대체 왜 이렇게 빨리 도망칠 수 있는 거지?'라는 표정으로 한 걸음 한 걸음 나가며 여유를 부린다!\"\n"
+		System.out.println("\"아뿔싸!" + (100 - totalCatchPercent) +"% 확률로 피카츄가 잡히지 않았다! '대체 왜 이렇게 빨리 도망칠 수 있는 거지?'라는 표정으로 한 걸음 한 걸음 나가며 여유를 부린다!\"\n"
 				+ "➤ \"피카~! (이게 바로 피카츄의 '도망의 기술'이지!)\"\n" + "(피카츄가 느긋하게 도망치며 상대는 놓치고 당황한다.)");
 		System.out.println();
 		return false;

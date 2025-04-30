@@ -8,15 +8,15 @@ import java.util.Random;
 // 땅,바다,하늘 배열길이 4개
 // 우주 배열길이 11개
 
-public class MonsterBase {
-	public int maxHP = 999999999;
-	public int currentHP= this.maxHP;
-	public int HPPercentage=100;
-	public int ATT= 1;
-	public String filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\유저.txt";
-	public String reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\유저.txt";
+public class MonsterBase2 {
+	int maxHP;
+	int currentHP;
+	int HPPercentage;
+	int ATT;
+	String filePath; // 기본 이미지 (나)
+	String reverseFilePath; // 반전 이미지(야생)
 
-	public PrintImgClass printImgClass;
+	PrintImgClass printImgClass;
 
 	public Random r = new Random();
 
@@ -36,18 +36,18 @@ public class MonsterBase {
 	
 
 
-	public MonsterBase() {
+	public MonsterBase2() {
 		this.maxHP = 999999999;
 		this.currentHP = this.maxHP;
-		this.currentHPPercentage();
 		this.ATT = 1;
+		this.HPPercentage = (int)((this.currentHP / (double)this.maxHP) * 100);
 		this.name = "기본";
-		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\유저.txt";
-		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\유저.txt";
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\기본 그림.txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\기본 그림.txt";
 	}
 	
 	//[new] 공격당했을때 처리
-	public boolean attackedAction(MonsterBase monsterBase) {
+	public boolean attackedAction(MonsterBase2 monsterBase) {
 		this.currentHP  = this.currentHP - monsterBase.ATT;
 		if (this.currentHP <= 0) { //몬스터의 HP가 0이하일 경우
 			return false;
@@ -60,7 +60,7 @@ public class MonsterBase {
 		this.HPPercentage = (int)((this.currentHP / (double)this.maxHP) * 100);
 	}
 	
-	public MonsterBase(String name) {
+	public MonsterBase2(String name) {
 		this.name = name;
 	}
 

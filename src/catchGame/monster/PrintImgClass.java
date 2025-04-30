@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import catchGame.manage.TextBoxClass;
 public class PrintImgClass {
 	File file;
 	String HPfilePath; // HP바 이미지 
@@ -11,10 +12,19 @@ public class PrintImgClass {
 	Scanner scanFile;
 	Scanner scanner = new Scanner(System.in);
 	String Img;
-	int HPPercentage;
+//	int HPPercentage;
+	int spaceNumber = 50;
+	public PrintImgClass() {
+		this.HPfilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\HP바.txt";
+	}
+	
 	public PrintImgClass(MonsterBase monsterBase) {
 		this.monsterBase = monsterBase;
 		this.HPfilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\HP바.txt";
+	}
+	
+	public void inputMonster(MonsterBase monsterBase) {
+		this.monsterBase = monsterBase;
 	}
 	
 	private void readImgFile() {
@@ -44,6 +54,13 @@ public class PrintImgClass {
 		}
 	}
 	
+//	private void printImg() {
+//		while(this.scanFile.hasNextLine()){
+//			this.Img = new String(this.scanFile.nextLine());
+//			TextBoxClass.printTextBox(this.Img);
+//		}
+//	}
+	
 	private void printImg() {
 		while(this.scanFile.hasNextLine()){
 			this.Img = new String(this.scanFile.nextLine());
@@ -54,7 +71,7 @@ public class PrintImgClass {
 	private void printReverseImg() {
 		while(this.scanFile.hasNextLine()){
 			this.Img = new String(this.scanFile.nextLine());
-			for(int i = 0; i < 60 ; i++) {
+			for(int i = 0; i < spaceNumber ; i++) {
 				System.out.print(" ");
 			}
 			System.out.println(this.Img);
@@ -62,28 +79,36 @@ public class PrintImgClass {
 	}
 	
 	private void printHPImg() {
+		for(int i = 0; i < 14 ; i++) {
+			System.out.print(" ");
+		}
+		System.out.println(this.monsterBase.name);
 		this.Img = new String(this.scanFile.nextLine());
 		System.out.println(this.Img);
 		this.Img = new String(this.scanFile.nextLine());
 		System.out.print(this.Img);
-		System.out.println(this.HPPercentage + "%");
+		System.out.println(this.monsterBase.HPPercentage + "%");
 		this.Img = new String(this.scanFile.nextLine());
 		System.out.println(this.Img);
 	}
 	
 	private void printReverseHPImg() {
-		for(int i = 0; i < 60 ; i++) {
+		for(int i = 0; i < spaceNumber + 12 ; i++) {
+			System.out.print(" ");
+		}
+		System.out.println("야생 " + this.monsterBase.name);
+		for(int i = 0; i < spaceNumber ; i++) {
 			System.out.print(" ");
 		}
 		this.Img = new String(this.scanFile.nextLine());
 		System.out.println(this.Img);
-		for(int i = 0; i < 60 ; i++) {
+		for(int i = 0; i < spaceNumber ; i++) {
 			System.out.print(" ");
 		}
 		this.Img = new String(this.scanFile.nextLine());
 		System.out.print(this.Img);
-		System.out.println(this.HPPercentage + "%");
-		for(int i = 0; i < 60 ; i++) {
+		System.out.println(this.monsterBase.HPPercentage + "%");
+		for(int i = 0; i < spaceNumber ; i++) {
 			System.out.print(" ");
 		}
 		this.Img = new String(this.scanFile.nextLine());
@@ -93,21 +118,23 @@ public class PrintImgClass {
 	public void runImgClass() {
 		this.readImgFile();
 		this.printImg();
+		this.readHPImgFile();
+		this.printHPImg();
 	}
 	
 	public void runReverseImgClass() {
 		this.readReverseImgFile();
 		this.printReverseImg();
+		this.readHPImgFile();
+		this.printReverseHPImg();
 	}
 	
 	public void runHPImgClass() {
-		this.HPPercentage = (int)((this.monsterBase.currentHP / (double)this.monsterBase.maxHP) * 100);
 		this.readHPImgFile();
 		this.printHPImg();
 	}
 	
 	public void runReverseHPImgClass() {
-		this.HPPercentage = (int)((this.monsterBase.currentHP / (double)this.monsterBase.maxHP) * 100);
 		this.readHPImgFile();
 		this.printReverseHPImg();
 	}

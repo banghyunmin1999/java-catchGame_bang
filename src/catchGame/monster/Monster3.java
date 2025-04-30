@@ -3,7 +3,13 @@ package catchGame.monster;
 public class Monster3 extends MonsterBase {
 
 	public Monster3() {
-		super("다꼬리");
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\다꼬리.txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\다꼬리 야생.txt";
+		this.maxHP = 80;
+		this.ATT = 3;
+		this.currentHP = this.maxHP;
+		this.currentHPPercentage();
+		this.name = "다꼬리";
 		this.spawnMap = "땅";
 		this.present = "노말 타입 포켓몬 | 잡기 귀찮은 고양이, 10번 찔러도 1번도 안 잡힐 자신감으로 하루를 보내는 고양이의 자존심";
 	}
@@ -73,10 +79,12 @@ public class Monster3 extends MonsterBase {
 	@Override
 	public boolean catchMonster() throws InterruptedException {
 		delayTime();
+		
+		int totalCatchPercent = (int)(100 - 25*(double)this.HPPercentage/100);
 		// 잡혔을 때 true
-		if (this.r.nextInt(4) + 1 <= 3) {
+		if (this.r.nextInt(100) < totalCatchPercent) {
 			System.out.println("=========포켓몬 포획 성공!=========");
-			System.out.println("\"75% 확률로 주인 없는 다꼬리가 잡혔다! 사실 도망가려다 귀찮아서 그냥 포켓볼 안으로 굴러 들어갔다.\"\n"
+			System.out.println("\" "+ totalCatchPercent + "% 확률로 주인 없는 다꼬리가 잡혔다! 사실 도망가려다 귀찮아서 그냥 포켓볼 안으로 굴러 들어갔다.\"\n"
 					+ "➤ \"꼬리~ 꼬리~ (여기 눕기 괜찮네...)\"\n" + "(다꼬리는 포켓볼 안에서 이불처럼 말려 자고 있다.)");
 			System.out.println();
 			this.ifCatch = true;
@@ -84,7 +92,7 @@ public class Monster3 extends MonsterBase {
 		}
 		// 안 잡혔을 때 false
 		System.out.println("=========포켓몬 포획 실패!=========");
-		System.out.println("\"25% 확률로 다꼬리가 잡히지 않았다! 포켓볼을 보자마자 땅속으로 직진, ‘어디 갔지?’라는 말이 끝나기도 전에 사라졌다.\"\n"
+		System.out.println("\""+ (100 - totalCatchPercent) + "% 확률로 다꼬리가 잡히지 않았다! 포켓볼을 보자마자 땅속으로 직진, ‘어디 갔지?’라는 말이 끝나기도 전에 사라졌다.\"\n"
 				+ "➤ \"꼬리~! (다음에 또 와~)\"\n" + "(남은 건 다꼬리의 꼬리 자국과 포켓볼의 허탈한 굴절.)");
 		System.out.println();
 		return false;

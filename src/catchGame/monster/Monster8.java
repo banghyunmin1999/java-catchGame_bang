@@ -3,7 +3,13 @@ package catchGame.monster;
 public class Monster8 extends MonsterBase {
 
 	public Monster8() {
-		super("디아루가");
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\디아루가.txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\디아루가 야생.txt";
+		this.maxHP = 8000;
+		this.ATT = 800;
+		this.currentHP = this.maxHP;
+		this.currentHPPercentage();
+		this.name = "디아루가";
 		this.spawnMap = "하늘";
 		this.present = "강철/드래곤 타입 포켓몬 | 시간의 신, 시계를 한 번만 돌리면 딱 맞춰서 일어날 수 있지. 뭐, 실제로는 계속 늦는 일만…";
 	}
@@ -75,17 +81,18 @@ public class Monster8 extends MonsterBase {
 		delayTime();
 		this.probabilityValue = r.nextInt(3);
 
+		int totalCatchPercent = (int)(100 - 92*(double)this.HPPercentage/100);
 		// 잡혔을 때 true
-		if (this.r.nextInt(10000) + 1 <= 767) {
+		if (this.r.nextInt(100) < totalCatchPercent) {
 			System.out.println("=========포켓몬 포획 성공!=========");
 			if (this.probabilityValue == 0) {
-				System.out.println("\"7.67% 확률로 ……이 시간의 지배자, 내가… 이렇게 작은 구 안에……\"\n"
+				System.out.println("\""+ totalCatchPercent + "% 확률로 ……이 시간의 지배자, 내가… 이렇게 작은 구 안에……\"\n"
 						+ "➤ \"흥, 뭐… 너한테 잠깐… 맡겨주는 것뿐이야. 오해는 하지 마……\"\n" + "(디아루가는 얼굴 붉히며 조용히 구석에 말없이 앉았다.)");
 			} else if (this.probabilityValue == 1) {
-				System.out.println("\"7.67% 확률로 디아루가가 잡혔다… 시간의 신이 너에게 마음을 열었어…?\"\n"
+				System.out.println("\""+ totalCatchPercent + "% 확률로 디아루가가 잡혔다… 시간의 신이 너에게 마음을 열었어…?\"\n"
 						+ "➤ \"너의 손길이… 따뜻해서…… 아니, 기분 나쁘단 뜻은 아니야……!\"\n" + "(포켓볼 안에서 혼잣말을 중얼거리고 있다.)");
 			} else {
-				System.out.println("\"7.67% 확률로 디아루가가 포켓볼 안에서 조용히 눈을 감는다.\"\n"
+				System.out.println("\""+ totalCatchPercent + "% 확률로 디아루가가 포켓볼 안에서 조용히 눈을 감는다.\"\n"
 						+ "➤ \"…이 세계의 끝에서 널 다시 만날 줄은 몰랐어… 네가 부른 거지?\"\n" + "(시간의 파동이 조용히 맴돌며 반짝인다.)");
 			}
 			System.out.println();
@@ -95,13 +102,13 @@ public class Monster8 extends MonsterBase {
 		// 안 잡혔을 때 false
 		System.out.println("=========포켓몬 포획 실패!=========");
 		if (this.probabilityValue == 0) {
-			System.out.println("\"92.33% 확률로  디아루가가 고요히 미소 지으며 포켓볼을 바라본다.\"\n" + "➤ \"…아직 너에겐… 날 받아들일 준비가 안 된 것 같아…\"\n"
+			System.out.println("\""+ (100 -totalCatchPercent) + "% 확률로  디아루가가 고요히 미소 지으며 포켓볼을 바라본다.\"\n" + "➤ \"…아직 너에겐… 날 받아들일 준비가 안 된 것 같아…\"\n"
 					+ "(포켓볼은 부드럽게 바닥에 떨어지고, 그녀는 사라졌다.)");
 		} else if (this.probabilityValue == 1) {
-			System.out.println("\"92.33% 확률로 디아루가는 당신을 한참 바라보다 고개를 돌렸다.\"\n"
+			System.out.println("\""+ (100 -totalCatchPercent) + "% 확률로 디아루가는 당신을 한참 바라보다 고개를 돌렸다.\"\n"
 					+ "➤ \"…흥. 이 정도 감정으론 나를 가둘 수 없어. 다음엔… 더 진심을 보여줘.\"\n" + "(그 말과 함께 시간이 찢기듯 열리고, 그녀는 사라졌다.)");
 		} else {
-			System.out.println("\"92.33% 확률로 포켓볼이 디아루가의 공간에 닿는 순간, 시간조차 얼어붙었다.\"\n"
+			System.out.println("\""+ (100 -totalCatchPercent) + "% 확률로 포켓볼이 디아루가의 공간에 닿는 순간, 시간조차 얼어붙었다.\"\n"
 					+ "➤ \"……이 시간은 나의 것… 아직, 너에겐 허락할 수 없어.\"\n" + "(그녀는 당신의 머리 위에 조용히 속삭인다. 그리고 사라진다.)");
 		}
 		System.out.println();

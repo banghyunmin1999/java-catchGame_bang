@@ -3,7 +3,13 @@ package catchGame.monster;
 public class Monster5 extends MonsterBase {
 
 	public Monster5() {
-		super("가이오가");
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\가이오가.txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\가이오가 야생.txt";
+		this.maxHP = 5000;
+		this.ATT = 300;
+		this.currentHP = this.maxHP;
+		this.currentHPPercentage();
+		this.name = "가이오가";
 		this.spawnMap = "바다";
 		this.present = "물 타입 포켓몬 | 바다의 왕자, 물 속에서 왕처럼 유유히 떠다니며, \"내가 물의 제왕이다!\"라고 외치고는 돌아서서 잡혀가는 물 포켓몬";
 	}
@@ -71,10 +77,12 @@ public class Monster5 extends MonsterBase {
 	@Override
 	public boolean catchMonster() throws InterruptedException {
 		delayTime();
+		
+		int totalCatchPercent = (int)(100 - 90*(double)this.HPPercentage/100);
 		// 잡혔을 때 true
-		if (this.r.nextInt(100) + 1 <= 9) {
+		if (this.r.nextInt(100) < totalCatchPercent) {
 			System.out.println("=========포켓몬 포획 성공!=========");
-			System.out.println("\"9% 확률로 믿기 힘들겠지만… 전설의 포켓몬 가이오가가 포켓볼에 들어갔다!\"\n"
+			System.out.println("\""+ totalCatchPercent + "% 확률로 믿기 힘들겠지만… 전설의 포켓몬 가이오가가 포켓볼에 들어갔다!\"\n"
 					+ "➤ \"가아오오오… (내 체급에 맞는 방이 아닌데… 뭐, 살다 보면 이런 날도 있지)\"\n" + "(가이오가는 포켓볼 안에서 몸을 접는 요가를 시작했다.)");
 			System.out.println();
 			this.ifCatch = true;
@@ -82,7 +90,7 @@ public class Monster5 extends MonsterBase {
 		}
 		// 안 잡혔을 때 false
 		System.out.println("=========포켓몬 포획 실패!=========");
-		System.out.println("\"91% 확률로 가이오가는 잡히지 않았다! 포켓볼이 던져진 순간, 바닷물로 위장하고 사라졌다!\"\n"
+		System.out.println("\""+ (100 -totalCatchPercent) + "% 확률로 가이오가는 잡히지 않았다! 포켓볼이 던져진 순간, 바닷물로 위장하고 사라졌다!\"\n"
 				+ "➤ \"가오가오~ (전설은 쉽게 포켓볼에 담기지 않아!)\"\n" + "(목숨 부지한걸로 만족하자)");
 		System.out.println();
 		return false;

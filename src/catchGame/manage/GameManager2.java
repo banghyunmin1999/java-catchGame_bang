@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import catchGame.user.User;
 
-public class GameManager {
+public class GameManager2 {
 	private boolean isRunning; // 게임 상태
 	User user;
 
@@ -12,7 +12,7 @@ public class GameManager {
 	String prevLocation;
 
 	// 객체 생성 시 user 객체 생성, 게임 상태 true로 설정
-	public GameManager() {
+	public GameManager2() {
 		user = new User();
 		this.isRunning = true;
 	}
@@ -127,7 +127,12 @@ public class GameManager {
 			}
 		}
 	}
-
+	// [new] 콘솔 클리어 메소드
+	public void claerConsole() {
+		for (int i = 0; i < 30; i++) {
+			System.out.println();
+		}
+	}
 	// 게임 실행 메소드
 	public void runGame() throws InterruptedException {
 		while (this.isRunning) {

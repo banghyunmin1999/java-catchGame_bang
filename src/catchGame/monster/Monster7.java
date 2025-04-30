@@ -3,7 +3,13 @@ package catchGame.monster;
 public class Monster7 extends MonsterBase {
 
 	public Monster7() {
-		super("뮤츠");
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\뮤츠.txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\뮤츠 야생.txt";
+		this.maxHP = 7000;
+		this.ATT = 70;
+		this.currentHP = this.maxHP;
+		this.currentHPPercentage();
+		this.name = "뮤츠";
 		this.spawnMap = "하늘";
 		this.present = "에스퍼 타입 포켓몬 | 난 누구? 난 뮤츠! 근데 아직도 자기 이름 외우는 게 힘든 불사의 진짜 엘리트 포켓몬";
 	}
@@ -73,10 +79,12 @@ public class Monster7 extends MonsterBase {
 	@Override
 	public boolean catchMonster() throws InterruptedException {
 		delayTime();
+		
+		int totalCatchPercent = (int)(100 - 75*(double)this.HPPercentage/100);
 		// 잡혔을 때 true
-		if (this.r.nextInt(4) + 1 == 1) {
+		if (this.r.nextInt(100) < totalCatchPercent) {
 			System.out.println("=========포켓몬 포획 성공!=========");
-			System.out.println("\"25% 확률로 뮤츠가 포켓볼에 갇힌 순간, 전 우주의 지적 생명체들이 충격에 빠졌다!\"\n"
+			System.out.println("\""+ totalCatchPercent + "% 확률로 뮤츠가 포켓볼에 갇힌 순간, 전 우주의 지적 생명체들이 충격에 빠졌다!\"\n"
 					+ "➤ \"잠깐만… 이거 시뮬레이션 아니야? 나 진짜 잡힌 거야?!\"\n" + "(현실인지 가상현실인지, 뮤츠도 헷갈리는 중.)");
 			System.out.println();
 			this.ifCatch = true;
@@ -84,7 +92,7 @@ public class Monster7 extends MonsterBase {
 		}
 		// 안 잡혔을 때 false
 		System.out.println("=========포켓몬 포획 실패!=========");
-		System.out.println("\"75% 확률로 뮤츠가 볼 안에서 순간이동으로 빠져나왔다! 전설은 갇히지 않는다.\"\n"
+		System.out.println("\""+ (100-totalCatchPercent) + "% 확률로 뮤츠가 볼 안에서 순간이동으로 빠져나왔다! 전설은 갇히지 않는다.\"\n"
 				+ "➤ \"넌 나를 가둘 수 없다. 포켓볼도 그렇고, 기대도 마찬가지야.\"\n" + "(명대사 제조기 뮤츠, 탈출하면서도 멘트는 기가 막히다.)");
 		System.out.println();
 		return false;

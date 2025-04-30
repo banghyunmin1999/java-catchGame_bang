@@ -3,7 +3,13 @@ package catchGame.monster;
 public class Monster6 extends MonsterBase {
 
 	public Monster6() {
-		super("그란돈");
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\그란돈.txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\그란돈 야생.txt";
+		this.maxHP = 5500;
+		this.ATT = 550;
+		this.currentHP = this.maxHP;
+		this.currentHPPercentage();
+		this.name = "그란돈";
 		this.spawnMap = "바다";
 		this.present = "불 타입 포켓몬 | 땅을 밟는 그랜드 파파, 사막에서 자고 일어나면 \"아, 너무 덥다!\"고 하는 진짜 땅속에서 자는 덩치 큰 포켓몬, 헌데 왜 얘가 바다에..?";
 	}
@@ -72,19 +78,21 @@ public class Monster6 extends MonsterBase {
 	@Override
 	public boolean catchMonster() throws InterruptedException {
 		delayTime();
+		
 		this.probabilityValue = r.nextInt(3);
 
-		// 잡혔을 때
-		if (this.r.nextInt(5) + 1 <= 2) {
+		int totalCatchPercent = (int)(100 - 80*(double)this.HPPercentage/100);
+		// 잡혔을 때 true
+		if (this.r.nextInt(100) < totalCatchPercent) {
 			System.out.println("=========포켓몬 포획 성공!=========");
 			if (this.probabilityValue == 0) {
-				System.out.println("\"40% 확률로 그란돈이 포켓볼에 갇혔다! 이게 가능한 일이었나?! 바다여서 가능했나보다!\"\n"
+				System.out.println("\""+ totalCatchPercent + "% 확률로 그란돈이 포켓볼에 갇혔다! 이게 가능한 일이었나?! 바다여서 가능했나보다!\"\n"
 						+ "➤ \"그라~돈 (대지의 신, 포켓볼 안에 갇히다니!)\"\n" + "(그란돈이 포켓볼 안에서 큰 소리로 불평한다. 대지의 신이 이렇게 작게 갇히다니!)");
 			} else if (this.probabilityValue == 1) {
-				System.out.println("\"40% 확률로 그란돈이 잡혔다! 땅에 있어야 할 애가 왜 바다에 허우적 거리는지 모르겠다 일단 잡았으니 좋았쓰!\"\n"
+				System.out.println("\""+ totalCatchPercent + "% 확률로 그란돈이 잡혔다! 땅에 있어야 할 애가 왜 바다에 허우적 거리는지 모르겠다 일단 잡았으니 좋았쓰!\"\n"
 						+ "➤ \"그라라라라~ (내가 이렇게 약해졌다고?!)\"\n" + "(그란돈이 포켓볼에서 구르며 땅을 흔들지만, 끝내 봉인된다.)");
 			} else {
-				System.out.println("\"40% 확률로 그란돈이 포켓볼에 들어갔다! 지구의 정복자가 포켓볼에 갇히다니!\"\n"
+				System.out.println("\""+ totalCatchPercent + "% 확률로 그란돈이 포켓볼에 들어갔다! 지구의 정복자가 포켓볼에 갇히다니!\"\n"
 						+ "➤ \"그라~돈! (내가, 내가 갇혔다구?! 대체 언제 이런 일이…?)\"\n"
 						+ "(그란돈이 포켓볼 안에서 커다란 한숨을 내쉰다. 그래도 포켓볼 안에서 굴러다닌다.)");
 			}
@@ -96,13 +104,13 @@ public class Monster6 extends MonsterBase {
 		System.out.println("=========포켓몬 포획 실패!=========");
 		if (this.probabilityValue == 0) {
 			System.out.println(
-					"\"60% 확률로 그란돈이 포켓볼에서 빠져나갔다! 대지의 힘으로 벗어나버렸다!\"\n" + "➤ \"그라라라라~ (너희들이 날 막을 수 있다고 생각했어?)\"\n"
+					"\""+ (100 - totalCatchPercent) + "% 확률로 그란돈이 포켓볼에서 빠져나갔다! 대지의 힘으로 벗어나버렸다!\"\n" + "➤ \"그라라라라~ (너희들이 날 막을 수 있다고 생각했어?)\"\n"
 							+ "(그란돈은 포켓볼에서 힘껏 튕겨나가며 바다를 흔든다. 썩어도 준치라고 만만치 않은 상대이다.)");
 		} else if (this.probabilityValue == 1) {
-			System.out.println("\"60% 확률로 그란돈은 잡히지 않았다! 땅(?)의 힘이 강력해서 포켓볼을 흔들어버렸다!\"\n"
+			System.out.println("\""+ (100 - totalCatchPercent) + "% 확률로 그란돈은 잡히지 않았다! 땅(?)의 힘이 강력해서 포켓볼을 흔들어버렸다!\"\n"
 					+ "➤ \"그라~돈! (이런 작은 장난감에 내가 갇힐 수 없다!)\"\n" + "(그란돈이 포켓볼 안에서 바다를 흔들어버리며 다시 탈출한다. '잡히지 않는 자'의 위엄!)");
 		} else {
-			System.out.println("\"60% 확률로 그란돈은 여전히 포켓볼을 뚫고 나온다! 대지의 신이 이 작은 장난감에 갇힐 순 없다!\"\n"
+			System.out.println("\""+ (100 - totalCatchPercent) + "% 확률로 그란돈은 여전히 포켓볼을 뚫고 나온다! 대지의 신이 이 작은 장난감에 갇힐 순 없다!\"\n"
 					+ "➤ \"그라라라~돈! (포켓볼로 날 가둘 수는 없다!)\"\n" + "(그란돈은 포켓볼을 불태운 후, 다시 지구의 신처럼 바다 한 가운데에 우뚝 서 있다.)");
 		}
 		System.out.println();

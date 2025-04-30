@@ -4,14 +4,11 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-import catchGame.manage.TextBoxClass;
 import catchGame.map.MapExploring;
 import catchGame.monster.MonsterArrays;
 import catchGame.monster.MonsterBase;
-import catchGame.monster.MonsterTest;
-import catchGame.monster.PrintImgClass;
 
-public class User {
+public class User2 {
 	public String userName; // 사용자 이름
 	public String location; // 사용자 위치
 	public PokeDexClass pokeDex; // 사용자 도감
@@ -19,16 +16,13 @@ public class User {
 	private MonsterBase[] myPoket; // 잡은 몬스터 배열
 	private int myPoketCnt; // 잡은 몬스터 수
 	private LocalDateTime startTime; // 플레이 시작 시간
-	private MonsterBase usermonster; // [new] 유저가 선택한 몬스터
-	PrintImgClass printImgClass; // [new] 유저 몬스터 이미지 출력 준비
+
 	Scanner scanner = new Scanner(System.in);
 
 	// User 객체 생성 시 이름 입력받고, 새로운 도감 불러옴
-	public User() {
+	public User2() {
 		try {
-			TextBoxClass.printTextBoxStart();
-			TextBoxClass.printTextBox("당신의 이름은?");
-			TextBoxClass.printTextBoxEnd();
+		    System.out.print("당신의 이름은? ");
 		    String input = scanner.nextLine();
 		    this.userName = customTrim(input);
 
@@ -47,8 +41,6 @@ public class User {
 		this.location = "집";
 		this.startTime = LocalDateTime.now();
 		this.myPoket = new MonsterBase[100];
-		this.usermonster = new MonsterTest(); // 기본 유저
-		this.printImgClass = new PrintImgClass();
 	}
 
 	// 사용자의 도감 출력
@@ -68,8 +60,7 @@ public class User {
 	}
 
 	// 현재 지역에 맞는 몬스터 정보 가져와서 몬스터 등장 및 포획
-	// [new] → 현재 지역에 맞는 몬스터 정보 가져와서 몬스터 등장 및 선택
-	public void loadFightMonster(MonsterArrays monsterArrays, String mapInfo, boolean isCatch)
+	private void loadFightMonster(MonsterArrays monsterArrays, String mapInfo, boolean isCatch)
 			throws InterruptedException {
 		String nowLocation = mapInfo;
 		if (this.location.equals(nowLocation)) {
@@ -88,99 +79,58 @@ public class User {
 				monster = monsterArrays.universeMonsters();
 				break;
 			}
-			if(this.checkMonster(monster)) {// 몬스터 조우 및 등장 문구 출력
-				Thread.sleep(500);
-				userAction(monster, isCatch);
-			}else {
-				return;
-			}
-			
+			this.checkMonster(monster); // 몬스터 조우 및 등장 문구 출력
+			Thread.sleep(500);
+			this.catchFightMonster(monster, isCatch); // 몬스터 포획
 		}
 	}
-	
-	public void userAction(MonsterBase monster , boolean isCatch) throws InterruptedException{
-		this.printImgClass.inputMonster(monster);
-		this.printImgClass.runReverseImgClass();
-		this.printImgClass.inputMonster(this.usermonster);
-		this.printImgClass.runImgClass();
-		TextBoxClass.printTextBoxStart();
-		TextBoxClass.printTextBox("1.싸운다");
-		TextBoxClass.printTextBox("2.포획한다");
-		TextBoxClass.printTextBox("3.도망간다");
-		TextBoxClass.printTextBoxEnd();
-		if(monster.name.equals("기본")) {
-			return;
-		}
-		switch (this.checkUserChoice()) {// 유저 선택
-			case "1" :  this.fightMonster(monster); 
-				break;
-			case "2" :  this.catchFightMonster(monster, isCatch); 
-				break;
-			case "3" :  return;
-		}
-	}
+
 	// 몬스터와의 조우 이벤트를 처리하고, 해당 몬스터의 등장 메시지를 출력
-	//[new] 못만났을경우 바로 돌아가는걸 판단하기 위해 return 추가
-	private boolean checkMonster(MonsterBase monster) {
+	private void checkMonster(MonsterBase monster) {
 		if (monster.isMet == 1) {
 			System.out.println("\n💥 몬스터를 만났다! 💥\n");
 			monster.appearanceComment();
-			return true;
 		} else {
-			System.out.println("\n😢 몬스터를 만나지 못했다... 😢\n");
-			return false;
+			System.out.println("\n😢 몬스터가 만나지 못했다... 😢\n");
 		}
 	}
-	// [new]몬스터 싸움
-	private void fightMonster(MonsterBase monster) throws InterruptedException {
-		System.out.println("\n>> 싸우는 중");
-		Thread.sleep(500);
-		System.out.println(">> ...");
-		Thread.sleep(500);
-		System.out.println(">> ...\n");
-		Thread.sleep(500);
-		System.out.println(">> " + this.usermonster.name + "이"  + monster.ATT + "만큼 피해를 입었다.\n");
-		System.out.println(">> " + monster.name + "에게"  + this.usermonster.ATT + "만큼 피해를 주었다.\n");
-		Thread.sleep(800);
-		if(monster.attackedAction(this.usermonster)) {
-			monster.currentHPPercentage();
-			this.usermonster.currentHPPercentage();
-			this.userAction(monster, false);
-		}else {
-			System.out.println("몬스터가 죽어버렸다....");
+
+	// 몬스터 포획
+	private void catchFightMonster(MonsterBase monster, boolean isCatch) throws InterruptedException {
+		if (!monster.name.equals("기본")) {
+			String userChoice = this.checkUserChoice(monster); // 유저 선택
+			String catchMonsterName = monster.name;
+			if (userChoice.equalsIgnoreCase("Y")) {
+				// 몬스터가 기본이 아닐 경우 포획 로직
+				System.out.println("\n>> 싸우는 중");
+				Thread.sleep(500);
+				System.out.println(">> ...");
+				Thread.sleep(500);
+				System.out.println(">> ...\n");
+				Thread.sleep(500);
+				this.fightMonster(monster, isCatch, catchMonsterName);
+			}
 			return;
 		}
 	}
-		
-	// 몬스터 포획
-	// 싸운다 → 포획한다 수정  , 필요없는 부분들 수정
-	private void catchFightMonster(MonsterBase monster, boolean isCatch) throws InterruptedException {
-		System.out.println("\n>> 포획하는 중");
-		Thread.sleep(500);
-		System.out.println(">> ...");
-		Thread.sleep(500);
-		System.out.println(">> ...\n");
-		Thread.sleep(500);
-		this.catchTryMonster(monster, isCatch, monster.name);
-	}
 
 	// 몬스터 조우 시 유저에게 싸울지 여부를 입력받아 반환
-	// [new] 싸운다 , 포획한다 , 도망간다 선택지로 변경후 그에 맞게 수정
-	public String checkUserChoice() {
+	private String checkUserChoice(MonsterBase monster) {
+		System.out.print("\n>> 싸우시겠습니까?(Y/N) ");
 		String userChoice = "";
 		while (true) {
 			userChoice = scanner.nextLine();
-			if (userChoice.equalsIgnoreCase("1") || userChoice.equalsIgnoreCase("2") || userChoice.equalsIgnoreCase("3")) {
+			if (userChoice.equalsIgnoreCase("Y") || userChoice.equalsIgnoreCase("N")) {
 		        break;
 		    } else {
-		        System.out.println("⚠️ 잘못된 입력입니다. 1,2 3중에 하나를 입력해주세요.");
+		        System.out.println("⚠️ 잘못된 입력입니다. 'Y' 또는 'N'을 입력해주세요.");
 		    }
 		}
 		return userChoice;
 	}
 
 	// 유저가 싸우기를 선택했을 경우 포획 로직을 수행
-	private void catchTryMonster(MonsterBase monster, boolean isCatch, String catchMonsterName)
+	private void fightMonster(MonsterBase monster, boolean isCatch, String catchMonsterName)
 			throws InterruptedException {
 		this.catchMonster(monster, isCatch, catchMonsterName);
 		return;
@@ -198,8 +148,6 @@ public class User {
 				System.out.println("✨ 띠링! " + catchMonsterName + "이(가) 포켓몬 도감에 등록되었습니다!");
 				this.updateMyPokeDex(catchMonsterName);
 			}
-		}else {
-			return;
 		}
 	}
 

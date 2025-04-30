@@ -3,7 +3,13 @@ package catchGame.monster;
 public class Monster9 extends MonsterBase {
 
 	public Monster9() {
-		super("펄기아");
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\펄기아txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\펄기아 야생.txt";
+		this.maxHP = 10000;
+		this.ATT = 1000;
+		this.currentHP = this.maxHP;
+		this.currentHPPercentage();
+		this.name = "펄기아";
 		this.spawnMap = "하늘";
 		this.present = "물/드래곤 타입 포켓몬 | 시공간의 요리사, 시공을 넘나들며 \"여기 시공 맞게 해서 내일은 저기 가봐야지!\"라며, 어디로 튈지 모르는 포켓몬";
 	}
@@ -75,17 +81,18 @@ public class Monster9 extends MonsterBase {
 		delayTime();
 		this.probabilityValue = r.nextInt(3);
 
+		int totalCatchPercent = (int)(100 - 95*(double)this.HPPercentage/100);
 		// 잡혔을 때 true
-		if (this.r.nextInt(250) + 1 <= 3) {
+		if (this.r.nextInt(100) < totalCatchPercent) {
 			System.out.println("=========포켓몬 포획 성공!=========");
 			if (this.probabilityValue == 0) {
-				System.out.println("\"1.2% 확률로  ……공간의 신인 내가, 이렇게까지 허락해주는 건…… 특.별.한. 거야.\"\n"
+				System.out.println("\""+ totalCatchPercent + "% 확률로  ……공간의 신인 내가, 이렇게까지 허락해주는 건…… 특.별.한. 거야.\"\n"
 						+ "➤ \"이 포켓볼 안… 네 기척이 느껴져서, 이상하게… 안심돼…\"\n" + "(펄기아가 부끄러운 듯 고개를 숙인다.)");
 			} else if (this.probabilityValue == 1) {
-				System.out.println("\"1.2% 확률로 펄기아는 천천히 포켓볼 안에 들어가더니… 입꼬리를 살짝 올렸다.\"\n"
+				System.out.println("\""+ totalCatchPercent + "% 확률로 펄기아는 천천히 포켓볼 안에 들어가더니… 입꼬리를 살짝 올렸다.\"\n"
 						+ "➤ \"…그냥… 거절하기엔… 네가 너무 진지했잖아. 어쩔 수 없이 인정한 거야… 바보…\"\n" + "(볼 안이 순간 반짝이며, 조용한 온기로 가득 찬다.)");
 			} else {
-				System.out.println("\"1.2% 확률로 당신이 던진 포켓볼을 잠시 바라보던 펄기아… 스스로 들어갔다.\"\n"
+				System.out.println("\""+ totalCatchPercent + "% 확률로 당신이 던진 포켓볼을 잠시 바라보던 펄기아… 스스로 들어갔다.\"\n"
 						+ "➤ \"…내 공간의 일부로 너를 받아들이겠어. 책임져야 해… 그 마음까지.\"\n" + "(신의 포켓몬은 조용히 눈을 감으며, 네 손안에 안긴다.)");
 			}
 			System.out.println();
@@ -95,13 +102,13 @@ public class Monster9 extends MonsterBase {
 		// 안 잡혔을 때 false
 		System.out.println("=========포켓몬 포획 실패!=========");
 		if (this.probabilityValue == 0) {
-			System.out.println("\"98.8% 확률로 펄기아는 포켓볼을 가볍게 피하며 속삭인다.\"\n" + "➤ \"조상님이 안 도와주시나보다 제사를 잘 지내보도록 하자!\"\n"
+			System.out.println("\""+ (100 -totalCatchPercent) + "% 확률로 펄기아는 포켓볼을 가볍게 피하며 속삭인다.\"\n" + "➤ \"조상님이 안 도와주시나보다 제사를 잘 지내보도록 하자!\"\n"
 					+ "(그녀의 몸은 공간의 균열 속으로 사라졌다. 잔향만이 남았다.)");
 		} else if (this.probabilityValue == 1) {
-			System.out.println("\"98.8% 확률로 포켓볼이 공중에서 멈췄다… 펄기아가 시간을 굽히고 있다.\"\n"
+			System.out.println("\""+ (100 -totalCatchPercent) + "% 확률로 포켓볼이 공중에서 멈췄다… 펄기아가 시간을 굽히고 있다.\"\n"
 					+ "➤ \"…잡히는 게 무서운 게 아니라… 네가 날 진심으로 부르지 않아서야.\"\n" + "(볼은 조용히 떨어지고, 그녀의 눈빛은 아련하다.)");
 		} else {
-			System.out.println("\"98.8% 확률로 펄기아는 포켓볼을 바라보며 슬쩍 미소 지었다.\"\n" + "➤ \"조금만 더… 네가 나를 원한다고 믿게 된다면, 그땐…\"\n"
+			System.out.println("\""+ (100 -totalCatchPercent) + "% 확률로 펄기아는 포켓볼을 바라보며 슬쩍 미소 지었다.\"\n" + "➤ \"조금만 더… 네가 나를 원한다고 믿게 된다면, 그땐…\"\n"
 					+ "(공간이 일그러지며 그녀는 떠났고, 너의 손은 허공을 움켜쥐었다.)");
 		}
 		System.out.println();

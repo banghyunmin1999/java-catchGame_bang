@@ -3,7 +3,13 @@ package catchGame.monster;
 public class Monster4 extends MonsterBase {
 
 	public Monster4() {
-		super("마자용");
+		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\마자용.txt";
+		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\마자용 야생.txt";
+		this.maxHP = 500;
+		this.ATT = 30;
+		this.currentHP = this.maxHP;
+		this.currentHPPercentage();
+		this.name = "마자용";
 		this.spawnMap = "땅";
 		this.present = "에스퍼 타입 포켓몬 | 뭐가 맞다는지 모르겠다, 쳐맞고싶다는건가?";
 	}
@@ -73,18 +79,20 @@ public class Monster4 extends MonsterBase {
 	@Override
 	public boolean catchMonster() throws InterruptedException {
 		delayTime();
+		
+		int totalCatchPercent = (int)(100 - 50*(double)this.HPPercentage/100);
 		// 잡혔을 때 true
-		if (this.r.nextInt(2) + 1 == 1) {
+		if (this.r.nextInt(100) < totalCatchPercent) {
 			System.out.println("=========포켓몬 포획 성공!=========");
 			System.out.println(
-					"50% 확률로 잡아냈다!\n" + "➤" + this.name + "의 눈이 제정신이 아닌거 같다..\n" + "(이런 녀석은 좀 아닌거 같은데.. 도감에 넣어야 되나?)");
+					""+ totalCatchPercent + "% 확률로 잡아냈다!\n" + "➤" + this.name + "의 눈이 제정신이 아닌거 같다..\n" + "(이런 녀석은 좀 아닌거 같은데.. 도감에 넣어야 되나?)");
 			this.ifCatch = true;
 			System.out.println();
 			return true;
 		}
 		// 안 잡혔을 때 false
 		System.out.println("=========포켓몬 포획 실패!=========");
-		System.out.println("50% 확률로 놓치고 말았다\n" + "➤" + this.name + "의 모습이 보이지 않는다.\n" + "(오히려 다행인거 같다..)");
+		System.out.println(""+ (100-totalCatchPercent) + "% 확률로 놓치고 말았다\n" + "➤" + this.name + "의 모습이 보이지 않는다.\n" + "(오히려 다행인거 같다..)");
 		System.out.println();
 		return false;
 	}
