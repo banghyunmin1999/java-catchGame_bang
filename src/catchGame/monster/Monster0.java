@@ -1,5 +1,8 @@
 package catchGame.monster;
 
+/**
+ * 더이상 사용 안하는 클래스
+ */
 // 아무것도 만나지 않았을 때
 public class Monster0 extends MonsterBase {
 

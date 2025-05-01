@@ -16,7 +16,11 @@ public class GameManager {
 		user = new User();
 		this.isRunning = true;
 	}
-
+/**
+ * [기존]게임 메뉴 출력 메소드
+ * 내 몬스터 교체 선택 가능하게 변경 
+ * @throws InterruptedException
+ */
 	// 게임 메뉴 출력 메소드
 	public void printGameMenu() throws InterruptedException {
 //		ClearConsole.clearConsole();

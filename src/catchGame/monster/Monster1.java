@@ -1,7 +1,7 @@
 package catchGame.monster;
 
-import catchGame.manage.ClearConsole;
 import catchGame.manage.TextBoxClass;
+import 콘솔.ClearConsole;
 
 public class Monster1 extends MonsterBase {
 

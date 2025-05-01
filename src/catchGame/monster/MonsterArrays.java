@@ -115,6 +115,7 @@ public class MonsterArrays {
 	}
 
 	// 우주맵(히든맵)에서 출현한 몬스터 등장확률
+	//[new] 너무 안만나는거 같아서 등장확률 조정
 	public MonsterBase universeMonsters() {
 		MonsterBase[] universe = {
 				// 최소 공배수 200
@@ -122,13 +123,13 @@ public class MonsterArrays {
 				new Monster8(), // 디아루가 4% => 1/25 => 8/200 | 180~187
 				new Monster9(), // 펄기아 4% => 1/25 => 8/200 | 188~195
 				new Monster10() }; // 아르세우스 2% => 1/50 => 4/200 | 196~199
-		if (r.nextInt(200) <= 179) {
+		if (r.nextInt(200) <= 100) {
 			this.n1 += 1;
 			return universe[0];
-		} else if (r.nextInt(200) <= 187) {
+		} else if (r.nextInt(200) <= 150) {
 			this.n2 += 1;
 			return universe[1];
-		} else if (r.nextInt(200) <= 195) {
+		} else if (r.nextInt(200) <= 190) {
 			this.n3 += 1;
 			return universe[2];
 		} else {

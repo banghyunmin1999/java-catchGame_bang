@@ -3,6 +3,7 @@ package catchGame.manage;
 import java.util.Scanner;
 
 import catchGame.user.User;
+import 콘솔.ClearConsole;
 
 public class GameManager2 {
 	private boolean isRunning; // 게임 상태

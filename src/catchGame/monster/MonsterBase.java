@@ -53,7 +53,7 @@ public class MonsterBase {
 		this.currentHP  = this.currentHP - monsterBase.ATT;
 		monsterBase.currentHP = monsterBase.currentHP - this.ATT;
 		if(monsterBase.currentHP <= 0 ) {
-			TextBoxClass.runPrintTextBox("체력이 없어서 더는 싸울수가 없다.. 정신이 아늑해졌다... (다음부터는 체력을 신경쓰도록 하자...)  게임을 종료합니다.");
+			TextBoxClass.runPrintTextBox("체력이 없어서 더는 싸울수가 없다.. 정신이 아늑해졌다... (출전한 유저나 몬스터의 HP를 잘 관리하자...)  게임을 종료합니다.");
 			System.exit(0);
 		}
 		if (this.currentHP <= 0) { //몬스터의 HP가 0이하일 경우
