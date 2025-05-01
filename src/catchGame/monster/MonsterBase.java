@@ -2,6 +2,8 @@ package catchGame.monster;
 
 import java.util.Random;
 
+import catchGame.manage.TextBoxClass;
+
 /// 등장확률
 // 땅, 바다, 하늘, 우주(히든)
 // 땅3개(피카츄,마자용,다꼬리) 바다3개(잉어킹,가이오가,그란돈)  하늘3개(뮤츠,펄기아,디아루가), 우주1개(아르세우스)
@@ -51,7 +53,7 @@ public class MonsterBase {
 		this.currentHP  = this.currentHP - monsterBase.ATT;
 		monsterBase.currentHP = monsterBase.currentHP - this.ATT;
 		if(monsterBase.currentHP <= 0 ) {
-			System.out.println("체력이 없어서 더는 싸울수가 없다.. 정신이 아늑해졌다");
+			TextBoxClass.runPrintTextBox("체력이 없어서 더는 싸울수가 없다.. 정신이 아늑해졌다... (다음부터는 체력을 신경쓰도록 하자...)  게임을 종료합니다.");
 			System.exit(0);
 		}
 		if (this.currentHP <= 0) { //몬스터의 HP가 0이하일 경우
@@ -72,7 +74,7 @@ public class MonsterBase {
 	// 마주쳤을 때
 	// 등장멘트
 	public void appearanceComment() {
-		// System.out.println();
+		// TextBoxClass.runPrintTextBox();
 	}
 
 	// 도망칠 확률 "개별사건"
@@ -96,9 +98,9 @@ public class MonsterBase {
 
 	public void delayTime() throws InterruptedException {
 		Thread.sleep(500);
-		System.out.println("\n>> ...");
+		TextBoxClass.runPrintTextBox(">> ...");
 		Thread.sleep(500);
-		System.out.println("\n>> ...");
+		TextBoxClass.runPrintTextBox(">> ...");
 	}
 	
 }

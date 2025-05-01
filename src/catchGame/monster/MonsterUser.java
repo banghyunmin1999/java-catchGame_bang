@@ -9,10 +9,9 @@ public class MonsterUser extends MonsterBase {
 		this.ATT = 5;
 		this.currentHP = this.maxHP;
 		this.currentHPPercentage();
-		this.name ="User";
-		this.spawnMap = "집";
 		this.present = "유저이다 죽으면 게임이 끝난다";
 		this.ifCatch = true;
+		this.name = "User";
 	}
 
 

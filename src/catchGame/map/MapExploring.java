@@ -23,12 +23,12 @@ public class MapExploring {
 		this.mapIterationCount = mapCount;
 		while (this.mapIndex == 2) {
 //			if (this.mapIterationCount < 1) {
-//				System.out.println("\n+++ 몬스터 잡기 게임 +++");
+//				TextBoxClass.runPrintTextBox("\n+++ 몬스터 잡기 게임 +++");
 //			}
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("맵을 선택하세요 ( 하늘 | 바다 | 땅 | 랜덤 | 취소)");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("🗺️ 맵을 선택하세요 (⛅ 하늘|🌊 바다|🌴 땅|🎲 랜덤|⚠️ 취소)");
+//			TextBoxClass.runPrintTextBox("🗺️ 맵을 선택하세요 (⛅ 하늘|🌊 바다|🌴 땅|🎲 랜덤|⚠️ 취소)");
 			this.answerMap = scanner.nextLine();
 			this.mapIndex = mapSelect(this.answerMap);
 			if (this.mapIndex == 0) {
@@ -62,25 +62,25 @@ public class MapExploring {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("바다맵 페이지로 이동합니다");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("🌊 바다맵 페이지로 이동합니다");
+//			TextBoxClass.runPrintTextBox("🌊 바다맵 페이지로 이동합니다");
 			this.mapProbabilityAnswer = this.answerMap;
 			this.mapReturn = 0;
 		} else if (answerMap.equals("땅")) {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("땅맵 페이지로 이동합니다");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("🌴 땅맵 페이지로 이동합니다");
+//			TextBoxClass.runPrintTextBox("🌴 땅맵 페이지로 이동합니다");
 			this.mapProbabilityAnswer = this.answerMap;
 			this.mapReturn = 0;
 		} else if (answerMap.equals("랜덤")) {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("=========랜덤맵 생성 중...=========");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("=========랜덤맵 생성 중...=========");
+//			TextBoxClass.runPrintTextBox("=========랜덤맵 생성 중...=========");
 			Thread.sleep(500);
 			String[] probabilityAnswer = mapProbability().split(" ");
 			mapProbabilityAnswer = probabilityAnswer[1];
-			System.out.println(probabilityAnswer[0] + " " + probabilityAnswer[1] + " 맵 페이지로 이동합니다");
+			TextBoxClass.runPrintTextBox(probabilityAnswer[0] + " " + probabilityAnswer[1] + " 맵 페이지로 이동합니다");
 			this.mapReturn = 0;
 		} else if (answerMap.equals("취소")) {
 			this.mapReturn = 1;
@@ -88,7 +88,7 @@ public class MapExploring {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("잘못 입력하셨습니다");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("잘못 입력하셨습니다");
+//			TextBoxClass.runPrintTextBox("잘못 입력하셨습니다");
 			this.mapReturn = 2;
 		}
 		return this.mapReturn;

@@ -36,14 +36,14 @@ public class User {
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox("이름은 공백일 수 없습니다. 기본 이름으로 설정합니다.");
 				TextBoxClass.printTextBoxEnd();
-//		        System.out.println("⚠️ 이름은 공백일 수 없습니다. 기본 이름으로 설정합니다.");
+//		        TextBoxClass.runPrintTextBox("⚠️ 이름은 공백일 수 없습니다. 기본 이름으로 설정합니다.");
 		        this.userName = "트레이너";
 		    }
 		} catch (Exception e) {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("입력 도중 오류가 발생했습니다. 기본 이름으로 설정합니다.");
 			TextBoxClass.printTextBoxEnd();
-//		    System.out.println("⚠️ 입력 도중 오류가 발생했습니다. 기본 이름으로 설정합니다.");
+//		    TextBoxClass.runPrintTextBox("⚠️ 입력 도중 오류가 발생했습니다. 기본 이름으로 설정합니다.");
 		    this.userName = "트레이너";
 		}
 		
@@ -113,6 +113,7 @@ public class User {
 		TextBoxClass.printTextBox("1.싸운다");
 		TextBoxClass.printTextBox("2.포획한다");
 		TextBoxClass.printTextBox("3.도망간다");
+		TextBoxClass.printTextBox("4.내 몬스터 교체");
 		TextBoxClass.printTextBoxEnd();
 		if(monster.name.equals("기본")) {
 			return;
@@ -123,6 +124,8 @@ public class User {
 			case "2" :  this.catchFightMonster(monster, isCatch); 
 				break;
 			case "3" :  return;
+			case "4" : this.changeMyMonster(); 
+				break;
 		}
 	}
 	// 몬스터와의 조우 이벤트를 처리하고, 해당 몬스터의 등장 메시지를 출력
@@ -132,14 +135,14 @@ public class User {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("몬스터를 만났다!");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("\n💥 몬스터를 만났다! 💥\n");
+//			TextBoxClass.runPrintTextBox("💥 몬스터를 만났다! 💥");
 			monster.appearanceComment();
 			return true;
 		} else {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("몬스터를 만나지 못했다...");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("\n😢 몬스터를 만나지 못했다... 😢\n");
+//			TextBoxClass.runPrintTextBox("😢 몬스터를 만나지 못했다... 😢");
 			return false;
 		}
 	}
@@ -148,24 +151,24 @@ public class User {
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> 싸우는 중");
 		TextBoxClass.printTextBoxEnd();
-//		System.out.println("\n>> 싸우는 중");
+//		TextBoxClass.runPrintTextBox(">> 싸우는 중");
 		Thread.sleep(500);
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> ...");
 		TextBoxClass.printTextBoxEnd();
-//		System.out.println(">> ...");
+//		TextBoxClass.runPrintTextBox(">> ...");
 		Thread.sleep(500);
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> ...");
 		TextBoxClass.printTextBoxEnd();
-//		System.out.println(">> ...\n");
+//		TextBoxClass.runPrintTextBox(">> ...");
 		Thread.sleep(500);
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> " + this.usermonster.name + "이"  + monster.ATT + "만큼 피해를 입었다.");
 		TextBoxClass.printTextBox(">> " + monster.name + "에게"  + this.usermonster.ATT + "만큼 피해를 주었다.");
 		TextBoxClass.printTextBoxEnd();
-//		System.out.println(">> " + this.usermonster.name + "이"  + monster.ATT + "만큼 피해를 입었다.\n");
-//		System.out.println(">> " + monster.name + "에게"  + this.usermonster.ATT + "만큼 피해를 주었다.\n");
+//		TextBoxClass.runPrintTextBox(">> " + this.usermonster.name + "이"  + monster.ATT + "만큼 피해를 입었다.");
+//		TextBoxClass.runPrintTextBox(">> " + monster.name + "에게"  + this.usermonster.ATT + "만큼 피해를 주었다.");
 		Thread.sleep(1000);
 		
 		if(monster.attackedAction(this.usermonster)) {
@@ -177,7 +180,7 @@ public class User {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("몬스터가 죽어버렸다....");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("몬스터가 죽어버렸다....");
+//			TextBoxClass.runPrintTextBox("몬스터가 죽어버렸다....");
 			return;
 		}
 	}
@@ -188,17 +191,16 @@ public class User {
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> 포획하는 중");
 		TextBoxClass.printTextBoxEnd();
-		System.out.println("\n>> 포획하는 중");
 		Thread.sleep(500);
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> ...");
 		TextBoxClass.printTextBoxEnd();
-//		System.out.println(">> ...");
+//		TextBoxClass.runPrintTextBox(">> ...");
 		Thread.sleep(500);
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> ...");
 		TextBoxClass.printTextBoxEnd();
-//		System.out.println(">> ...\n");
+//		TextBoxClass.runPrintTextBox(">> ...");
 		Thread.sleep(500);
 		this.catchTryMonster(monster, isCatch);
 	}
@@ -209,13 +211,13 @@ public class User {
 		String userChoice = "";
 		while (true) {
 			userChoice = scanner.nextLine();
-			if (userChoice.equalsIgnoreCase("1") || userChoice.equalsIgnoreCase("2") || userChoice.equalsIgnoreCase("3")) {
+			if (userChoice.equalsIgnoreCase("1") || userChoice.equalsIgnoreCase("2") || userChoice.equalsIgnoreCase("3") ||  userChoice.equalsIgnoreCase("4")) {
 		        break;
 		    } else {
 				TextBoxClass.printTextBoxStart();
-				TextBoxClass.printTextBox("잘못된 입력입니다. 1,2 3중에 하나를 입력해주세요.");
+				TextBoxClass.printTextBox("잘못된 입력입니다. 1,2,3,4중에 하나를 입력해주세요.");
 				TextBoxClass.printTextBoxEnd();
-//		        System.out.println("⚠️ 잘못된 입력입니다. 1,2 3중에 하나를 입력해주세요.");
+//		        TextBoxClass.runPrintTextBox("⚠️ 잘못된 입력입니다. 1,2 3중에 하나를 입력해주세요.");
 		    }
 		}
 		return userChoice;
@@ -239,7 +241,7 @@ public class User {
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox("띠링! " + monster.name + "이(가) 포켓몬 도감에 등록되었습니다!");
 				TextBoxClass.printTextBoxEnd();
-//				System.out.println("✨ 띠링! " + catchMonsterName + "이(가) 포켓몬 도감에 등록되었습니다!");
+//				TextBoxClass.runPrintTextBox("✨ 띠링! " + catchMonsterName + "이(가) 포켓몬 도감에 등록되었습니다!");
 				this.updateMyPokeDex(monster);
 			}
 		}else {
@@ -278,11 +280,11 @@ public class User {
 		TextBoxClass.printTextBox("잡은 몬스터 수: " + myPoketCnt + "마리");
 		TextBoxClass.printTextBox("현재 잡은 몬스터");
 		TextBoxClass.printTextBoxEnd();
-//		System.out.println("사용자명: " + this.userName);
-//		System.out.println("사용자 위치: " + (this.location.equals("취소") ? "집" : this.location));
-//		System.out.println("플레이 시간: " + getPlayTime());
-//		System.out.println("잡은 몬스터 수: " + myPoketCnt + "마리");
-//		System.out.println("현재 잡은 몬스터\n");
+//		TextBoxClass.runPrintTextBox("사용자명: " + this.userName);
+//		TextBoxClass.runPrintTextBox("사용자 위치: " + (this.location.equals("취소") ? "집" : this.location));
+//		TextBoxClass.runPrintTextBox("플레이 시간: " + getPlayTime());
+//		TextBoxClass.runPrintTextBox("잡은 몬스터 수: " + myPoketCnt + "마리");
+//		TextBoxClass.runPrintTextBox("현재 잡은 몬스터");
 		for (int i = 0; i < this.myPoketCnt; i++) {
 		    if (this.myPoket[i] == null) continue;
 		    
@@ -300,7 +302,7 @@ public class User {
 		    countOnLine++;
 
 		    if (countOnLine == lineLimit) {
-		        System.out.println();
+		    	System.out.println();
 		        countOnLine = 0;
 		    }
 		}

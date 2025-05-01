@@ -2,6 +2,7 @@ package catchGame.user;
 
 import java.util.Scanner;
 
+import catchGame.manage.TextBoxClass;
 import catchGame.monster.Monster1;
 import catchGame.monster.Monster10;
 import catchGame.monster.Monster2;
@@ -39,9 +40,9 @@ public class PokeDexClass {
 
 	public void choicePokeDex() {
 		// 안쓰는 함수 (사용은 가능)
-		System.out.println("1,2번 중에 선택하세요");
-		System.out.println("1. 도감 전체보기");
-		System.out.println("2. 도감 검색하기");
+		TextBoxClass.runPrintTextBox("1,2번 중에 선택하세요");
+		TextBoxClass.runPrintTextBox("1. 도감 전체보기");
+		TextBoxClass.runPrintTextBox("2. 도감 검색하기");
 		Scanner scanner = new Scanner(System.in);
 		int userInput = Integer.parseInt(scanner.nextLine());
 		if (userInput == 1) {
@@ -53,19 +54,19 @@ public class PokeDexClass {
 
 	// 포켓몬 도감 출력 잡은것만 세부사항출력 못잡은건 ???로 출력
 	public void printPokeDex() {
-		System.out.println("포켓몬 도감을 출력합니다.\n");
+		TextBoxClass.runPrintTextBox("포켓몬 도감을 출력합니다.");
 		for (int i = 1; i < this.pokeDex.length; i++) {// i = 1 부터 해야 0번(못마주침)출력안함
-			System.out.println("---------------------------------\n");
+			TextBoxClass.runPrintTextBox("---------------------------------");
 			this.RPad(i);
 			if (this.pokeDex[i].ifCatch) {// true = 잡힌거
 
-				System.out.println("포켓몬 이름 : " + this.pokeDex[i].name);
-				System.out.println("포켓몬 출현장소 : " + this.pokeDex[i].spawnMap);
-				System.out.println("포켓몬 설명 : " + this.pokeDex[i].present + "\n");
+				TextBoxClass.runPrintTextBox("포켓몬 이름 : " + this.pokeDex[i].name);
+				TextBoxClass.runPrintTextBox("포켓몬 출현장소 : " + this.pokeDex[i].spawnMap);
+				TextBoxClass.runPrintTextBox("포켓몬 설명 : " + this.pokeDex[i].present + "");
 			} else {
-				System.out.println("아직 못잡은 포켓몬 입니다. 화이팅!\n");
+				TextBoxClass.runPrintTextBox("아직 못잡은 포켓몬 입니다. 화이팅!");
 			}
-			System.out.println("---------------------------------\n");
+			TextBoxClass.runPrintTextBox("---------------------------------");
 		}
 	}
 
@@ -92,44 +93,44 @@ public class PokeDexClass {
 
 //	검색하기 포켓몬 도감번호와 이름을 먼저 출력하고 , 검색하고 싶은 도감번호 입력받아서 그 도감번호 출력
 	public void searchPokeDex() {
-		System.out.println("---------------------------------\n");
-		System.out.println("포켓몬 도감 검색하기");
-		System.out.println("포켓몬 도감번호와 이름을 출력합니다. 원하시는 포켓몬의 도감번호를 입력해 주세요\n");
+		TextBoxClass.runPrintTextBox("---------------------------------");
+		TextBoxClass.runPrintTextBox("포켓몬 도감 검색하기");
+		TextBoxClass.runPrintTextBox("포켓몬 도감번호와 이름을 출력합니다. 원하시는 포켓몬의 도감번호를 입력해 주세요");
 		for (int i = 1; i < this.pokeDex.length; i++) {
-			System.out.println("---------------------------------\n");
+			TextBoxClass.runPrintTextBox("---------------------------------");
 			this.RPad(i);
 			if (this.pokeDex[i].ifCatch) {// true = 잡힌거
-				System.out.println("포켓몬 이름 : " + this.pokeDex[i].name + "\n");
+				TextBoxClass.runPrintTextBox("포켓몬 이름 : " + this.pokeDex[i].name + "");
 			} else {
-				System.out.println("포켓몬 이름 : ???\n");
+				TextBoxClass.runPrintTextBox("포켓몬 이름 : ???");
 			}
 			
 		}
-		System.out.println("---------------------------------\n");
+		TextBoxClass.runPrintTextBox("---------------------------------");
 		try {
 			Scanner scanner = new Scanner(System.in);
-			System.out.print("원하시는 도감번호 앞 0을 제외한 1~10울 입력해 주세요 : ");
+			TextBoxClass.runPrintTextBox("원하시는 도감번호 앞 0을 제외한 1~10울 입력해 주세요 : ");
 			int userInput = Integer.parseInt(scanner.nextLine());
-			System.out.println("\n---------------------------------\n");
+			TextBoxClass.runPrintTextBox("---------------------------------");
 			if (userInput <= 10 && 0 < userInput) {
 				if (this.pokeDex[userInput].ifCatch == true) {
 					this.RPad(userInput);
-					System.out.println("포켓몬 이름 : " + this.pokeDex[userInput].name);
-					System.out.println("포켓몬 출현장소 : " + this.pokeDex[userInput].spawnMap);
-					System.out.println("포켓몬 설명 : " + this.pokeDex[userInput].present + "\n");
-					System.out.println("---------------------------------\n");
+					TextBoxClass.runPrintTextBox("포켓몬 이름 : " + this.pokeDex[userInput].name);
+					TextBoxClass.runPrintTextBox("포켓몬 출현장소 : " + this.pokeDex[userInput].spawnMap);
+					TextBoxClass.runPrintTextBox("포켓몬 설명 : " + this.pokeDex[userInput].present + "");
+					TextBoxClass.runPrintTextBox("---------------------------------");
 				} else {
 					this.RPad(userInput);
-					System.out.println(this.pokeDex[userInput].spawnMap + "에서 나타난다는 소문이 있다. 화이팅!\n");
-					System.out.println("---------------------------------\n");
+					TextBoxClass.runPrintTextBox(this.pokeDex[userInput].spawnMap + "에서 나타난다는 소문이 있다. 화이팅!");
+					TextBoxClass.runPrintTextBox("---------------------------------");
 				}
 			}else {
-				System.out.println("도감번호 앞 0을 제외한 1~10을 입력해 주세요\n");
+				TextBoxClass.runPrintTextBox("도감번호 앞 0을 제외한 1~10을 입력해 주세요");
 				this.searchPokeDex();
 				
 			}
 		}catch(Exception e) {
-			System.out.println("숫자만 입력 가능합니다\n");
+			TextBoxClass.runPrintTextBox("숫자만 입력 가능합니다");
 			this.searchPokeDex();
 		}
 
@@ -137,24 +138,24 @@ public class PokeDexClass {
 	}
 //	[new]
 	public MonsterBase changeMonster(MonsterBase monster) {
-		System.out.println("---------------------------------\n");
-		System.out.println("포켓몬 도감번호와 이름을 출력합니다. 교체를 원하시는 포켓몬의 도감번호를 입력해 주세요\n");
+		TextBoxClass.runPrintTextBox("---------------------------------");
+		TextBoxClass.runPrintTextBox("포켓몬 도감번호와 이름을 출력합니다. 교체를 원하시는 포켓몬의 도감번호를 입력해 주세요");
 		for (int i = 1; i < this.pokeDex.length; i++) {
-			System.out.println("---------------------------------\n");
+			TextBoxClass.runPrintTextBox("---------------------------------");
 			this.RPad(i);
 			if (this.pokeDex[i].ifCatch) {// true = 잡힌거
-				System.out.println("포켓몬 이름 : " + this.pokeDex[i].name + "\n");
+				TextBoxClass.runPrintTextBox("포켓몬 이름 : " + this.pokeDex[i].name + "");
 			} else {
-				System.out.println("포켓몬 이름 : ???\n");
+				TextBoxClass.runPrintTextBox("포켓몬 이름 : ???");
 			}
 			
 		}
-		System.out.println("---------------------------------\n");
+		TextBoxClass.runPrintTextBox("---------------------------------");
 		try {
 			Scanner scanner = new Scanner(System.in);
-			System.out.print("교체를 원하시는 도감번호 0~10을 입력해 주세요 0(유저): ");
+			TextBoxClass.runPrintTextBox("교체를 원하시는 도감번호 0~10을 입력해 주세요 0(유저)");
 			int userInput = Integer.parseInt(scanner.nextLine());
-			System.out.println("\n---------------------------------\n");
+			TextBoxClass.runPrintTextBox("---------------------------------");
 			if (userInput <= 10 && 0 <= userInput) {
 				if (this.pokeDex[userInput].ifCatch == true) {
 					for (int i = 0; i < this.pokeDex.length; i++) {
@@ -163,19 +164,19 @@ public class PokeDexClass {
 						}
 					}
 					monster = this.pokeDex[userInput];
-					System.out.println(this.pokeDex[userInput].name + "으로 교체했습니다");
+					TextBoxClass.runPrintTextBox(this.pokeDex[userInput].name + "으로 교체했습니다");
 					return this.pokeDex[userInput];
 				} else {
-					System.out.println("못 잡은 포켓몬으로는 교체할 수 없다");
+					TextBoxClass.runPrintTextBox("못 잡은 포켓몬으로는 교체할 수 없다");
 					this.changeMonster(monster);;
 				}
 			}else {
-				System.out.println("도감번호 0~10을 입력해 주세요\n");
+				TextBoxClass.runPrintTextBox("도감번호 0~10을 입력해 주세요");
 				this.changeMonster(monster);;
 				
 			}
 		}catch(Exception e) {
-			System.out.println("숫자만 입력 가능합니다\n");
+			TextBoxClass.runPrintTextBox("숫자만 입력 가능합니다");
 			this.changeMonster(monster);;
 		}
 		return monster;
@@ -194,6 +195,6 @@ public class PokeDexClass {
 			}
 		}
 		// 출력
-		System.out.println("도감 번호 : No." + RPad + i);
+		TextBoxClass.runPrintTextBox("도감 번호 : No." + RPad + i);
 	}
 }

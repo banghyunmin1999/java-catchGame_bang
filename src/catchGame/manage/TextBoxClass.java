@@ -8,13 +8,7 @@ public class TextBoxClass {
 	public TextBoxClass() {
 
 	}
-//	public TextBoxClass(int boxWidth) {
-//		boxWidth = boxWidth;
-//	}
-//	
-//	public void inputWidthLength(int boxWidth) {
-//		boxWidth = boxWidth;
-//	}
+
 	
 	public static void printTextBoxStart() {
 		System.out.println("┌" + "─".repeat(boxWidth) + "┐");
@@ -39,6 +33,36 @@ public class TextBoxClass {
 		return count;
 	}
 	
+	public static boolean ifCharHangul(char ch) {
+		if('가' <= ch && ch<= '힣') {
+			return true;
+		}
+		return false;
+	}
+	
+	public static void runPrintTextBox(String strText) {
+		int strLenCount = 0;
+		StringBuilder strLine = new StringBuilder();
+		printTextBoxStart();
+		for (char num : strText.toCharArray()) {
+			if(ifCharHangul(num)) {
+				strLenCount  = strLenCount + 2; // 한글일경우
+			}else {
+				strLenCount++; // 한글이 아닐경우
+			}
+			strLine.append(num);
+			if (strLenCount > boxWidth/(double)2) {
+				printTextBox(strLine.toString());
+				strLenCount = 0;
+				strLine  = new StringBuilder();
+			}
+			
+		}
+	    if (strLine.length() > 0) { // 남은 문자열 출력
+	        printTextBox(strLine.toString());
+	    }
+		printTextBoxEnd();
+	}
 
 	public static void printTextBox(String strText) {
 		int count = ifHangul(strText);
@@ -49,4 +73,10 @@ public class TextBoxClass {
 	    String whitespace = " ";
 	    System.out.println("│" + whitespace.repeat(leftPad) + strText + whitespace.repeat(rightPad) + "│");
 	}
+	
+//	public static void runPrintTextBox(String strText) {
+//		printTextBoxStart();
+//		printTextBox(strText);
+//		printTextBoxEnd();
+//	}
 }
