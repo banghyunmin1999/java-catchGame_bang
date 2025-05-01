@@ -5,15 +5,20 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import catchGame.manage.TextBoxClass;
+
+/**
+ * 새롭게 추가된 .txt 파일을 읽어와 내 몬스터와 야생 몬스터를 출력하는 클래스
+ */
 public class PrintImgClass {
+	
 	File file;
 	String HPfilePath; // HP바 이미지 
 	MonsterBase monsterBase;
 	Scanner scanFile;
 	Scanner scanner = new Scanner(System.in);
 	String Img;
-//	int HPPercentage;
 	int spaceNumber = 50;
+	
 	public PrintImgClass() {
 		this.HPfilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\HP바.txt";
 	}
@@ -53,14 +58,7 @@ public class PrintImgClass {
 			System.out.println("파일이 없습니다");
 		}
 	}
-	
-//	private void printImg() {
-//		while(this.scanFile.hasNextLine()){
-//			this.Img = new String(this.scanFile.nextLine());
-//			TextBoxClass.printTextBox(this.Img);
-//		}
-//	}
-	
+
 	private void printImg() {
 		while(this.scanFile.hasNextLine()){
 			this.Img = new String(this.scanFile.nextLine());

@@ -10,6 +10,12 @@ import catchGame.manage.TextBoxClass;
 // 땅,바다,하늘 배열길이 4개
 // 우주 배열길이 11개
 
+/**
+ * [기존] 모든 몬스터들의 베이스 클래스
+ * [new] 전투와 이미지 출력에 필요한 maxHP currentHP HPPercentage ATT filePath reverseFilePath printImgClass 등을 추가
+ * 공격 당했을떄 처리 메소드 추가
+ * HP 갱신 메소드 추가
+ */
 public class MonsterBase {
 	public int maxHP;
 	public int currentHP;
@@ -48,7 +54,11 @@ public class MonsterBase {
 		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\유저.txt";
 	}
 	
-	//[new] 공격당했을때 처리
+	/**
+	 * 공격당했을때 처리
+	 * @param monsterBase
+	 * @return
+	 */
 	public boolean attackedAction(MonsterBase monsterBase) {
 		this.currentHP  = this.currentHP - monsterBase.ATT;
 		monsterBase.currentHP = monsterBase.currentHP - this.ATT;
@@ -62,7 +72,10 @@ public class MonsterBase {
 			return true;
 	}
 	}
-	//[new] HPPercentage 갱신
+	
+	/**
+	 * HPPercentage 갱신
+	 */
 	public void currentHPPercentage() {
 		this.HPPercentage = (int)((this.currentHP / (double)this.maxHP) * 100);
 	}

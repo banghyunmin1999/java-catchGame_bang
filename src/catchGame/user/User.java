@@ -11,6 +11,11 @@ import catchGame.monster.MonsterBase;
 import catchGame.monster.MonsterUser;
 import catchGame.monster.PrintImgClass;
 
+
+/**
+ * [기존] 유저 행동관리 클래스
+ * [new] 전체 출력 텍스트 박스화, 자신이 잡은 포켓몬을 직접 도감에 등록하게끔 변경(기존 이름만 주고 도감에서 변경), 여러 메소드들 편집과 몬스터 싸움 메소드 신규 생성
+ */
 public class User {
 	public String userName; // 사용자 이름
 	public String location; // 사용자 위치
@@ -36,14 +41,12 @@ public class User {
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox("이름은 공백일 수 없습니다. 기본 이름으로 설정합니다.");
 				TextBoxClass.printTextBoxEnd();
-//		        TextBoxClass.runPrintTextBox("⚠️ 이름은 공백일 수 없습니다. 기본 이름으로 설정합니다.");
 		        this.userName = "트레이너";
 		    }
 		} catch (Exception e) {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("입력 도중 오류가 발생했습니다. 기본 이름으로 설정합니다.");
 			TextBoxClass.printTextBoxEnd();
-//		    TextBoxClass.runPrintTextBox("⚠️ 입력 도중 오류가 발생했습니다. 기본 이름으로 설정합니다.");
 		    this.userName = "트레이너";
 		}
 		
@@ -73,8 +76,14 @@ public class User {
 		this.loadFightMonster(monsterArrays, this.location, isCatch);
 	}
 
-	// 현재 지역에 맞는 몬스터 정보 가져와서 몬스터 등장 및 포획
-	// [new] → 현재 지역에 맞는 몬스터 정보 가져와서 몬스터 등장 및 선택
+	/**
+	 * [기존] 현재 지역에 맞는 몬스터 정보 가져와서 몬스터 등장 및 포획
+	 * [new] → 현재 지역에 맞는 몬스터 정보 가져와서 몬스터 등장 및 선택
+	 * @param monsterArrays
+	 * @param mapInfo
+	 * @param isCatch
+	 * @throws InterruptedException
+	 */
 	public void loadFightMonster(MonsterArrays monsterArrays, String mapInfo, boolean isCatch)
 			throws InterruptedException {
 		String nowLocation = mapInfo;
@@ -104,6 +113,13 @@ public class User {
 		}
 	}
 	
+	/**
+	 * [기존] 유저 선택 클래스
+	 * [new] 몬스터 교체 추가
+	 * @param monster
+	 * @param isCatch
+	 * @throws InterruptedException
+	 */
 	public void userAction(MonsterBase monster , boolean isCatch) throws InterruptedException{
 		this.printImgClass.inputMonster(monster);
 		this.printImgClass.runReverseImgClass();
@@ -128,8 +144,13 @@ public class User {
 				break;
 		}
 	}
-	// 몬스터와의 조우 이벤트를 처리하고, 해당 몬스터의 등장 메시지를 출력
-	//[new] 못만났을경우 바로 돌아가는걸 판단하기 위해 return 추가
+	
+	/**
+	 * [기존]몬스터와의 조우 이벤트를 처리하고, 해당 몬스터의 등장 메시지를 출력
+	 * [new] 못만났을경우 바로 돌아가는걸 판단하기 위해 return 추가
+	 * @param monster
+	 * @return
+	 */
 	private boolean checkMonster(MonsterBase monster) {
 		if (monster.isMet == 1) {
 			TextBoxClass.printTextBoxStart();
@@ -146,29 +167,30 @@ public class User {
 			return false;
 		}
 	}
+	
+	/**
+	 * 새롭게 만든 몬스터 싸움 메소드
+	 * @param monster
+	 * @throws InterruptedException
+	 */
 	// [new]몬스터 싸움
 	private void fightMonster(MonsterBase monster) throws InterruptedException {
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> 싸우는 중");
 		TextBoxClass.printTextBoxEnd();
-//		TextBoxClass.runPrintTextBox(">> 싸우는 중");
 		Thread.sleep(500);
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> ...");
 		TextBoxClass.printTextBoxEnd();
-//		TextBoxClass.runPrintTextBox(">> ...");
 		Thread.sleep(500);
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> ...");
 		TextBoxClass.printTextBoxEnd();
-//		TextBoxClass.runPrintTextBox(">> ...");
 		Thread.sleep(500);
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> " + this.usermonster.name + "이"  + monster.ATT + "만큼 피해를 입었다.");
 		TextBoxClass.printTextBox(">> " + monster.name + "에게"  + this.usermonster.ATT + "만큼 피해를 주었다.");
 		TextBoxClass.printTextBoxEnd();
-//		TextBoxClass.runPrintTextBox(">> " + this.usermonster.name + "이"  + monster.ATT + "만큼 피해를 입었다.");
-//		TextBoxClass.runPrintTextBox(">> " + monster.name + "에게"  + this.usermonster.ATT + "만큼 피해를 주었다.");
 		Thread.sleep(1000);
 		
 		if(monster.attackedAction(this.usermonster)) {
@@ -180,13 +202,17 @@ public class User {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("몬스터가 죽어버렸다....");
 			TextBoxClass.printTextBoxEnd();
-//			TextBoxClass.runPrintTextBox("몬스터가 죽어버렸다....");
 			return;
 		}
 	}
-		
-	// 몬스터 포획
-	// 싸운다 → 포획한다 수정  , 필요없는 부분들 수정
+	
+	/**
+	 * [기존] 몬스터 포획 메소드
+	 * [new] 싸운다 → 포획한다 수정  , 필요없는 부분들 수정
+	 * @param monster
+	 * @param isCatch
+	 * @throws InterruptedException
+	 */
 	private void catchFightMonster(MonsterBase monster, boolean isCatch) throws InterruptedException {
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox(">> 포획하는 중");
@@ -204,9 +230,11 @@ public class User {
 		Thread.sleep(500);
 		this.catchTryMonster(monster, isCatch);
 	}
+	/**
+	 *  [new] 싸운다 , 포획한다 , 도망간다 선택지로 변경후 그에 맞게 수정
+	 * @return
+	 */
 
-	// 몬스터 조우 시 유저에게 싸울지 여부를 입력받아 반환
-	// [new] 싸운다 , 포획한다 , 도망간다 선택지로 변경후 그에 맞게 수정
 	public String checkUserChoice() {
 		String userChoice = "";
 		while (true) {
@@ -241,7 +269,6 @@ public class User {
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox("띠링! " + monster.name + "이(가) 포켓몬 도감에 등록되었습니다!");
 				TextBoxClass.printTextBoxEnd();
-//				TextBoxClass.runPrintTextBox("✨ 띠링! " + catchMonsterName + "이(가) 포켓몬 도감에 등록되었습니다!");
 				this.updateMyPokeDex(monster);
 			}
 		}else {
@@ -280,11 +307,6 @@ public class User {
 		TextBoxClass.printTextBox("잡은 몬스터 수: " + myPoketCnt + "마리");
 		TextBoxClass.printTextBox("현재 잡은 몬스터");
 		TextBoxClass.printTextBoxEnd();
-//		TextBoxClass.runPrintTextBox("사용자명: " + this.userName);
-//		TextBoxClass.runPrintTextBox("사용자 위치: " + (this.location.equals("취소") ? "집" : this.location));
-//		TextBoxClass.runPrintTextBox("플레이 시간: " + getPlayTime());
-//		TextBoxClass.runPrintTextBox("잡은 몬스터 수: " + myPoketCnt + "마리");
-//		TextBoxClass.runPrintTextBox("현재 잡은 몬스터");
 		for (int i = 0; i < this.myPoketCnt; i++) {
 		    if (this.myPoket[i] == null) continue;
 		    
@@ -339,7 +361,9 @@ public class User {
         return String.format("%02d시간 %02d분 %02d초", hours, minutes, seconds);
     }
     
-//    [new] 자신의 포켓몬 교체
+    /**
+     * 새롭게 추가한 자신의 출전 몬스터 교체 클래스
+     */
     public void changeMyMonster() {
     	this.usermonster = pokeDex.changeMonster(this.usermonster);
     }

@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 import catchGame.manage.TextBoxClass;
 
+
+/**
+ * [기존] 맵관련 클래스
+ * [new] 전체적인 출력을 텍스트 박스 안에 출력시키게 조정
+ */
 public class MapExploring {
 	public String[] map = { "하늘", "바다", "땅", "랜덤", "취소" };
 	Scanner scanner = new Scanner(System.in);

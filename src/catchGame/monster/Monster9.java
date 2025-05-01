@@ -1,7 +1,10 @@
 package catchGame.monster;
 
 import catchGame.manage.TextBoxClass;
-
+/**
+ * [기존] 몬스터9 클래스
+ * [new] 이미지와 전투부분, 출력 텍스트박스화 , 확률 조정과 출력부분조정
+ */
 public class Monster9 extends MonsterBase {
 
 	public Monster9() {

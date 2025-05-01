@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 import catchGame.user.User;
 
+
+/**
+ * 전체적인 게임 진행 관리 클래스 
+ * [new] 1. 전체 출력 부분을 텍스트 박스 안에서 진행하게 변경
+ * 2. 몬스터 교체 선택지 추가
+ */	 
 public class GameManager {
 	private boolean isRunning; // 게임 상태
 	User user;
@@ -45,7 +51,6 @@ public class GameManager {
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox(">> 맵 선택이 취소되었습니다. 홈으로 돌아갑니다.");
 				TextBoxClass.printTextBoxEnd();
-//				System.out.println("\n>> 맵 선택이 취소되었습니다. 홈으로 돌아갑니다.");
 				return;
 			}
 
@@ -54,28 +59,22 @@ public class GameManager {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("--" + user.location + "맵에 소환되었습니다" + "--");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("--" + user.location + "맵에 소환되었습니다" + "--");
 			Thread.sleep(500);
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("(..두리번...두리번..)");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("(..두리번...두리번..)");
 			Thread.sleep(500);
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox(">> 몬스터를 탐색 중입니다.");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("\n>> 몬스터를 탐색 중입니다.");
 			Thread.sleep(500);
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox(">> ...");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("\n>> ...");
 			Thread.sleep(500);
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox(">> ...");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("\n>> ...");
-
 			user.catchMonster();
 			printUserAction();
 			break;
@@ -84,7 +83,6 @@ public class GameManager {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox(">> 나의 몬스터 도감을 확인합니다.");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("\n>> 나의 몬스터 도감을 확인합니다.");
 			// 도감 출력 메서드 호출
 			user.printMyPokeDex();
 			printUserAction();
@@ -96,7 +94,6 @@ public class GameManager {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox(">> 내 정보를 확인합니다.");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("\n>> 내 정보를 확인합니다.");
 			// 사용자 정보 출력
 			user.printUserInfo();
 			break;
@@ -104,7 +101,6 @@ public class GameManager {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox(">> 게임을 종료합니다. 감사합니다!");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("\n>> 게임을 종료합니다. 감사합니다!");
 			this.isRunning = false;
 			break;
 		case "6":
@@ -117,17 +113,19 @@ public class GameManager {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("잘못된 입력입니다. 1 ~ 5 사이의 숫자를 입력하세요.");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("잘못된 입력입니다. 1 ~ 5 사이의 숫자를 입력하세요.");
 		}
 	}
 
+	/**
+	 * [new]  몬스터 교체 추가
+	 * @throws InterruptedException
+	 */
 	public void printUserAction() throws InterruptedException {
 		Scanner scanner = new Scanner(System.in);
 		while (true) {
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("1. 계속 탐색하기 2. 다른 맵 이동 3. 도감 보기 4. 몬스터 검색 5. 홈으로 가기 6. 몬스터 교체");
 			TextBoxClass.printTextBoxEnd();
-//			System.out.println("\n1. 계속 탐색하기 2. 다른 맵 이동 3. 도감 보기 4. 몬스터 검색 5. 홈으로 가기");
 			String ans = scanner.nextLine();
 			ans = ans.replace(" ", "");
 
@@ -136,17 +134,14 @@ public class GameManager {
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox(">> 몬스터를 탐색 중입니다.");
 				TextBoxClass.printTextBoxEnd();
-//				System.out.println("\n>> 몬스터를 탐색 중입니다.");
 				Thread.sleep(500);
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox(">> ...");
 				TextBoxClass.printTextBoxEnd();
-//				System.out.println("\n>> ...");
 				Thread.sleep(500);
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox(">> ...");
 				TextBoxClass.printTextBoxEnd();
-//				System.out.println("\n>> ...");
 				user.catchMonster();
 				break;
 			case "2":
@@ -157,7 +152,6 @@ public class GameManager {
 					TextBoxClass.printTextBoxStart();
 					TextBoxClass.printTextBox(">> 맵 이동이 취소되었습니다. 현재 맵에서 계속 진행합니다.");
 					TextBoxClass.printTextBoxEnd();
-//					System.out.println("\n>> 맵 이동이 취소되었습니다. 현재 맵에서 계속 진행합니다.");
 					user.location = prevLocation;
 					user.catchMonster();
 					break;
@@ -165,7 +159,6 @@ public class GameManager {
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox("--" + user.location + "맵에 소환되었습니다--");
 				TextBoxClass.printTextBoxEnd();
-//				System.out.println("\n--" + user.location + "맵에 소환되었습니다--");
 				user.catchMonster();
 				break;
 
@@ -185,18 +178,12 @@ public class GameManager {
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox("잘못된 입력입니다. 1 ~ 5 사이의 숫자를 입력하세요.");
 				TextBoxClass.printTextBoxEnd();
-//				System.out.println("잘못된 입력입니다. 1 ~ 5 사이의 숫자를 입력하세요.");
 				printUserAction();
 				break;
 			}
 		}
 	}
-	// [new] 콘솔 클리어 메소드
-	public void claerConsole() {
-		for (int i = 0; i < 30; i++) {
-			System.out.println();
-		}
-	}
+
 	// 게임 실행 메소드
 	public void runGame() throws InterruptedException {
 		while (this.isRunning) {

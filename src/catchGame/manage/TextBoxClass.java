@@ -1,5 +1,10 @@
 package catchGame.manage;
 
+
+
+/**
+ * 새롭게 추가한 출력을 텍스트 박스 안에서 출력하게 하는 클래스
+ */
 public class TextBoxClass {
 	static int boxWidth = 100;
 	int boxlength;
@@ -9,14 +14,20 @@ public class TextBoxClass {
 
 	}
 
-	
+	/**
+	 * 윗 박스 부분
+	 */
 	public static void printTextBoxStart() {
 		System.out.println("┌" + "─".repeat(boxWidth) + "┐");
 	}
 	
+	/**
+	 * 아래 박스 부분
+	 */
 	public static void printTextBoxEnd() {
 		System.out.println("└" + "─".repeat(boxWidth) + "┘");
 	}
+	
 	/**
 	 * 주어진 문자열에서 한글 문자의 개수를 세는 메서드.
 	 * 만든 이유:한글이 자리를 2칸 차지해서 상자가 깨지는 현상으로 인해 한글을 체크
@@ -33,6 +44,11 @@ public class TextBoxClass {
 		return count;
 	}
 	
+	/**
+	 * 주어진 글자 하나가 한글인지 아닌지를 리턴하는 메서드
+	 * @param ch
+	 * @return
+	 */
 	public static boolean ifCharHangul(char ch) {
 		if('가' <= ch && ch<= '힣') {
 			return true;
@@ -40,6 +56,10 @@ public class TextBoxClass {
 		return false;
 	}
 	
+	/**
+	 * 긴 텍스트가 들어올경우 박스가 깨지는 현상으로 인해 너무 길지 않게 짤라서 나눠서 중앙 출력시키는 메소드
+	 * @param strText
+	 */
 	public static void runPrintTextBox(String strText) {
 		int strLenCount = 0;
 		StringBuilder strLine = new StringBuilder();
@@ -63,7 +83,11 @@ public class TextBoxClass {
 	    }
 		printTextBoxEnd();
 	}
-
+	
+	/**
+	 * 텍스트 박스 중앙부분 출력 메소드 
+	 * @param strText
+	 */
 	public static void printTextBox(String strText) {
 		int count = ifHangul(strText);
 	    int totalSpace = boxWidth - strText.length() - count;
@@ -73,10 +97,4 @@ public class TextBoxClass {
 	    String whitespace = " ";
 	    System.out.println("│" + whitespace.repeat(leftPad) + strText + whitespace.repeat(rightPad) + "│");
 	}
-	
-//	public static void runPrintTextBox(String strText) {
-//		printTextBoxStart();
-//		printTextBox(strText);
-//		printTextBoxEnd();
-//	}
 }
