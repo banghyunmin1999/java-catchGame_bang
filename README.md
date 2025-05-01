@@ -31,6 +31,8 @@
 
 
 ## 게임 플레이 방법
+![완성화면](https://github.com/user-attachments/assets/cbcc069b-c7d6-4891-9e64-81edfdd0d06b)
+![몬스터게임 플로우차트](https://github.com/user-attachments/assets/70398d85-588d-4b98-996b-b7ae983412ad)
 
 ### 메인 메뉴
 1.  맵 선택하기
