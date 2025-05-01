@@ -92,7 +92,7 @@ public class TextBoxClass {
 		int count = ifHangul(strText);
 	    int totalSpace = boxWidth - strText.length() - count;
 	    int leftPad = totalSpace / 2;
-	    int rightPad = totalSpace - leftPad;  // 오른쪽이 1 더 많게
+	    int rightPad = totalSpace - leftPad;
 	
 	    String whitespace = " ";
 	    System.out.println("│" + whitespace.repeat(leftPad) + strText + whitespace.repeat(rightPad) + "│");
