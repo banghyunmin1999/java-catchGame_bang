@@ -157,6 +157,11 @@ public class PokeDexClass {
 			System.out.println("\n---------------------------------\n");
 			if (userInput <= 10 && 0 <= userInput) {
 				if (this.pokeDex[userInput].ifCatch == true) {
+					for (int i = 0; i < this.pokeDex.length; i++) {
+						if(this.pokeDex[i].name == monster.name) {
+							this.pokeDex[i] = monster;
+						}
+					}
 					monster = this.pokeDex[userInput];
 					System.out.println(this.pokeDex[userInput].name + "으로 교체했습니다");
 					return this.pokeDex[userInput];
