@@ -1,8 +1,8 @@
 package catchGame.monster;
 
-public class MonsterTest extends MonsterBase {
+public class MonsterUser extends MonsterBase {
 	
-	public MonsterTest() {
+	public MonsterUser() {
 		this.filePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\유저.txt";
 		this.reverseFilePath = "T:\\github\\java-catchGame_bang\\src\\catchGame\\monster\\잉어킹 야생.txt";
 		this.maxHP = 10000;
@@ -12,6 +12,7 @@ public class MonsterTest extends MonsterBase {
 		this.name ="User";
 		this.spawnMap = "집";
 		this.present = "유저이다 죽으면 게임이 끝난다";
+		this.ifCatch = true;
 	}
 
 

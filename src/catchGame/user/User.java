@@ -8,7 +8,7 @@ import catchGame.manage.TextBoxClass;
 import catchGame.map.MapExploring;
 import catchGame.monster.MonsterArrays;
 import catchGame.monster.MonsterBase;
-import catchGame.monster.MonsterTest;
+import catchGame.monster.MonsterUser;
 import catchGame.monster.PrintImgClass;
 
 public class User {
@@ -53,7 +53,7 @@ public class User {
 		this.location = "집";
 		this.startTime = LocalDateTime.now();
 		this.myPoket = new MonsterBase[100];
-		this.usermonster = new MonsterTest(); // 기본 유저
+		this.usermonster = new MonsterUser(); // 기본 유저
 		this.printImgClass = new PrintImgClass();
 	}
 
@@ -200,7 +200,7 @@ public class User {
 		TextBoxClass.printTextBoxEnd();
 //		System.out.println(">> ...\n");
 		Thread.sleep(500);
-		this.catchTryMonster(monster, isCatch, monster.name);
+		this.catchTryMonster(monster, isCatch);
 	}
 
 	// 몬스터 조우 시 유저에게 싸울지 여부를 입력받아 반환
@@ -222,26 +222,25 @@ public class User {
 	}
 
 	// 유저가 싸우기를 선택했을 경우 포획 로직을 수행
-	private void catchTryMonster(MonsterBase monster, boolean isCatch, String catchMonsterName)
+	private void catchTryMonster(MonsterBase monster, boolean isCatch)
 			throws InterruptedException {
-		this.catchMonster(monster, isCatch, catchMonsterName);
+		this.catchMonster(monster, isCatch);
 		return;
 	}
 
 	// 몬스터 포획 시 실행
-	private void catchMonster(MonsterBase monster, boolean isCatch, String catchMonsterName)
+	private void catchMonster(MonsterBase monster, boolean isCatch)
 			throws InterruptedException {
 		if (monster.runMonster()) {
 			isCatch = monster.catchMonster();
-			catchMonsterName = monster.name;
 			if (isCatch) {
 				this.myPoket[myPoketCnt] = monster;
 				myPoketCnt++;
 				TextBoxClass.printTextBoxStart();
-				TextBoxClass.printTextBox("띠링! " + catchMonsterName + "이(가) 포켓몬 도감에 등록되었습니다!");
+				TextBoxClass.printTextBox("띠링! " + monster.name + "이(가) 포켓몬 도감에 등록되었습니다!");
 				TextBoxClass.printTextBoxEnd();
 //				System.out.println("✨ 띠링! " + catchMonsterName + "이(가) 포켓몬 도감에 등록되었습니다!");
-				this.updateMyPokeDex(catchMonsterName);
+				this.updateMyPokeDex(monster);
 			}
 		}else {
 			return;
@@ -249,8 +248,8 @@ public class User {
 	}
 
 	// 몬스터를 잡았을 때 잡은 몬스터의 이름을 기준으로 도감 정보 최신화
-	private void updateMyPokeDex(String monsterName) {
-		this.pokeDex.updatePokeDex(monsterName);
+	private void updateMyPokeDex(MonsterBase monster) {
+		this.pokeDex.updatePokeDex(monster);
 	}
 
 	// 도감 검색
@@ -336,5 +335,10 @@ public class User {
         long seconds = duration.getSeconds() % 60;
 
         return String.format("%02d시간 %02d분 %02d초", hours, minutes, seconds);
+    }
+    
+//    [new] 자신의 포켓몬 교체
+    public void changeMyMonster() {
+    	this.usermonster = pokeDex.changeMonster(this.usermonster);
     }
 }

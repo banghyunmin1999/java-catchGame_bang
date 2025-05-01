@@ -9,7 +9,7 @@ public class TestMonsterClass {
 		TextBoxClass.printTextBoxStart();
 		TextBoxClass.printTextBox("안녕하세여");
 		TextBoxClass.printTextBoxEnd();
-		MonsterTest monsterTest = new MonsterTest();
+		MonsterUser monsterTest = new MonsterUser();
 		PrintImgClass printImgClass = new PrintImgClass(monsterTest);
 		printImgClass.runReverseImgClass();
 		printImgClass.runReverseHPImgClass();

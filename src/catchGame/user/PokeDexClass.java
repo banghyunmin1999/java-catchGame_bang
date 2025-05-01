@@ -2,7 +2,6 @@ package catchGame.user;
 
 import java.util.Scanner;
 
-import catchGame.monster.Monster0;
 import catchGame.monster.Monster1;
 import catchGame.monster.Monster10;
 import catchGame.monster.Monster2;
@@ -14,6 +13,7 @@ import catchGame.monster.Monster7;
 import catchGame.monster.Monster8;
 import catchGame.monster.Monster9;
 import catchGame.monster.MonsterBase;
+import catchGame.monster.MonsterUser;
 
 public class PokeDexClass {
 
@@ -24,7 +24,7 @@ public class PokeDexClass {
 	}
 
 	public void insertPokeDex() { // 11개 배열에 Monster 객체 하나식 입력
-		this.pokeDex[0] = new Monster0();
+		this.pokeDex[0] = new MonsterUser();
 		this.pokeDex[1] = new Monster1();
 		this.pokeDex[2] = new Monster2();
 		this.pokeDex[3] = new Monster3();
@@ -69,11 +69,22 @@ public class PokeDexClass {
 		}
 	}
 
+////	포켓몬 잡은 몬스터 잡았다고 최신화
+//	public void updatePokeDex(String name) {
+//		for (int i = 1; i < this.pokeDex.length; i++) {
+//			if (this.pokeDex[i].name.equals(name)) {
+//				this.pokeDex[i].ifCatch = true;
+//			}
+//		}
+//
+//	}
+	
 //	포켓몬 잡은 몬스터 잡았다고 최신화
-	public void updatePokeDex(String name) {
+	//[new] 잡은 포켓몬 자체를 도감에 등록
+	public void updatePokeDex(MonsterBase monster) {
 		for (int i = 1; i < this.pokeDex.length; i++) {
-			if (this.pokeDex[i].name.equals(name)) {
-				this.pokeDex[i].ifCatch = true;
+			if (this.pokeDex[i].name.equals(monster.name)) {
+				this.pokeDex[i] = monster;
 			}
 		}
 
@@ -123,6 +134,46 @@ public class PokeDexClass {
 		}
 
 
+	}
+//	[new]
+	public MonsterBase changeMonster(MonsterBase monster) {
+		System.out.println("---------------------------------\n");
+		System.out.println("포켓몬 도감번호와 이름을 출력합니다. 교체를 원하시는 포켓몬의 도감번호를 입력해 주세요\n");
+		for (int i = 1; i < this.pokeDex.length; i++) {
+			System.out.println("---------------------------------\n");
+			this.RPad(i);
+			if (this.pokeDex[i].ifCatch) {// true = 잡힌거
+				System.out.println("포켓몬 이름 : " + this.pokeDex[i].name + "\n");
+			} else {
+				System.out.println("포켓몬 이름 : ???\n");
+			}
+			
+		}
+		System.out.println("---------------------------------\n");
+		try {
+			Scanner scanner = new Scanner(System.in);
+			System.out.print("교체를 원하시는 도감번호 0~10을 입력해 주세요 0(유저): ");
+			int userInput = Integer.parseInt(scanner.nextLine());
+			System.out.println("\n---------------------------------\n");
+			if (userInput <= 10 && 0 <= userInput) {
+				if (this.pokeDex[userInput].ifCatch == true) {
+					monster = this.pokeDex[userInput];
+					System.out.println(this.pokeDex[userInput].name + "으로 교체했습니다");
+					return this.pokeDex[userInput];
+				} else {
+					System.out.println("못 잡은 포켓몬으로는 교체할 수 없다");
+					this.changeMonster(monster);;
+				}
+			}else {
+				System.out.println("도감번호 0~10을 입력해 주세요\n");
+				this.changeMonster(monster);;
+				
+			}
+		}catch(Exception e) {
+			System.out.println("숫자만 입력 가능합니다\n");
+			this.changeMonster(monster);;
+		}
+		return monster;
 	}
 	
 //  도감번호 RPad 매서드

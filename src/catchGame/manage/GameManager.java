@@ -27,7 +27,8 @@ public class GameManager {
 		TextBoxClass.printTextBox("3. 몬스터 검색하기");
 		TextBoxClass.printTextBox("4. 내 정보 보기");
 		TextBoxClass.printTextBox("5. 게임 종료");
-		TextBoxClass.printTextBox("메뉴를 선택하세요 (1-5): ");
+		TextBoxClass.printTextBox("6. 내 몬스터 교체");
+		TextBoxClass.printTextBox("메뉴를 선택하세요 (1-6): ");
 		TextBoxClass.printTextBoxEnd();
 		String inputChoice = scanner.nextLine();
 		inputChoice = inputChoice.replace(" ", "");
@@ -102,6 +103,12 @@ public class GameManager {
 //			System.out.println("\n>> 게임을 종료합니다. 감사합니다!");
 			this.isRunning = false;
 			break;
+		case "6":
+			TextBoxClass.printTextBoxStart();
+			TextBoxClass.printTextBox(">> 내 몬스터를 교체합니다");
+			TextBoxClass.printTextBoxEnd();
+			user.changeMyMonster();
+			break;
 		default:
 			TextBoxClass.printTextBoxStart();
 			TextBoxClass.printTextBox("잘못된 입력입니다. 1 ~ 5 사이의 숫자를 입력하세요.");
@@ -114,7 +121,7 @@ public class GameManager {
 		Scanner scanner = new Scanner(System.in);
 		while (true) {
 			TextBoxClass.printTextBoxStart();
-			TextBoxClass.printTextBox("1. 계속 탐색하기 2. 다른 맵 이동 3. 도감 보기 4. 몬스터 검색 5. 홈으로 가기");
+			TextBoxClass.printTextBox("1. 계속 탐색하기 2. 다른 맵 이동 3. 도감 보기 4. 몬스터 검색 5. 홈으로 가기 6. 몬스터 교체");
 			TextBoxClass.printTextBoxEnd();
 //			System.out.println("\n1. 계속 탐색하기 2. 다른 맵 이동 3. 도감 보기 4. 몬스터 검색 5. 홈으로 가기");
 			String ans = scanner.nextLine();
@@ -167,6 +174,9 @@ public class GameManager {
 			case "5":
 				user.location = "집";
 				return;
+			case "6":
+				user.changeMyMonster();
+				break;
 			default:
 				TextBoxClass.printTextBoxStart();
 				TextBoxClass.printTextBox("잘못된 입력입니다. 1 ~ 5 사이의 숫자를 입력하세요.");
